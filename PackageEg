@@ -1,0 +1,123 @@
+package Day1.Pkg1;
+
+public class Parent {
+	private void pfn() {
+		System.out.println("Private pfn Parent");
+	}
+	protected void p2cfn() {
+		System.out.println("Protected p2cfn Parent");
+	}
+	void pkgfn() {
+		System.out.println("Default pkgfn Parent");
+	}
+	public void allfn() {
+		System.out.println("Public allfn Parent");
+	}
+	public void call() {
+		pfn();
+		p2cfn();
+		pkgfn();
+		allfn();
+	}
+
+}
+
+
+
+
+
+
+
+
+package Day1.Pkg1;
+
+public class ChildPkg1 extends Parent{
+	public void call() { //all except private fn : directly
+		//pfn();
+		p2cfn();
+		pkgfn();
+		allfn();
+	}
+}
+
+
+
+
+package Day1.Pkg1;
+
+public class ClassPkg {
+	public void call() {
+		Parent p=new Parent();
+//		p.pfn();
+		p.p2cfn();
+		p.pkgfn();
+		p.allfn();
+	}
+
+}
+
+
+
+
+
+
+
+package Day1.Pkg2;
+
+import Day1.Pkg1.Parent;
+
+public class ChildPkg2 extends Parent{
+	public void call() { //all except private and default fn : directly
+		//pfn();
+		p2cfn();
+//		pkgfn();
+		allfn();
+	}
+}
+
+
+
+
+
+
+package Day1.Pkg2;
+
+import Day1.Pkg1.Parent;
+
+public class ClassPkg2 {
+	public void call() {
+		Parent p=new Parent();
+//		p.pfn();
+//		p.p2cfn();
+//		p.pkgfn();
+		p.allfn();
+	}
+
+}
+
+
+
+
+
+package Day1;
+import Day1.Pkg1.*;
+import Day1.Pkg2.*;
+
+public class ClassMain {
+
+	public static void main(String[] args) {
+		Parent parent=new Parent();
+		parent.call();
+		ChildPkg1 c1=new ChildPkg1();
+		c1.call();
+		ClassPkg c2=new ClassPkg();
+		c2.call();
+		ChildPkg2 c3=new ChildPkg2();
+		c3.call();
+		ClassPkg2 c4=new ClassPkg2();
+		c4.call();
+		
+
+	}
+
+}
