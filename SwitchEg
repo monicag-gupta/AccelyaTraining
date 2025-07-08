@@ -1,6 +1,6 @@
 package Day1;
 import java.util.Scanner;
-public class Hi {
+public class SwitchEg {
 	public static void main(String[] args) {
 		System.out.print("Enter Week day's number: ");
 		int day;
@@ -19,9 +19,6 @@ public class Hi {
 		System.out.println(dayName); // Output: Wednesday
 	}
 }
-
-
-
 
 
 
