@@ -104,7 +104,7 @@ public class SwitchEg4 {
 
 package Day1;
 import java.util.Scanner;
-public class SwitchEg {
+public class SwitchEg5 {
 	public static void main(String[] args) {
 		Object obj = "Hello, World!";
 		String result = switch (obj) {
