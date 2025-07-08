@@ -1,0 +1,62 @@
+package Day1;
+
+import java.util.Objects;
+
+public class POJOEg {
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		POJOEg p=(POJOEg)obj;
+		return this.name.equals(p.name);
+	}
+
+
+	public void setName(String name) {
+		if(name!=null)
+			this.name = name;
+	}
+	
+	public POJOEg(String name) {
+		this.name=name;
+	}
+	public POJOEg() {}
+
+
+	@Override
+	public String toString() {
+		return "POJOEg [name=" + name + "]";
+	}
+
+
+
+	public static void main(String[] args) {
+		POJOEg p1=new POJOEg("John");
+		POJOEg p2=new POJOEg("John");
+		if(p1.equals(p2)) {
+			System.out.println("The Object "+p1 + " is equal to  "+p2);
+		}
+		else
+			System.out.println("The Object "+p1 + " is not equal to  "+p2);
+	}
+
+
+
+	
+}
+
+
+
+/*The Object POJOEg [name=John] is equal to  POJOEg [name=John]
+*/
