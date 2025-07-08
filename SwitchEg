@@ -72,3 +72,27 @@ public class SwitchEg3 {
 	}
 }
 
+
+
+
+
+
+package Day1;
+import java.util.Scanner;
+public class SwitchEg4 {
+	public static void main(String[] args) {
+		System.out.print("Enter Week day's name in full: ");
+		enum Day {
+		    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+		}
+		Day day = Day.valueOf((new Scanner(System.in)).nextLine().toUpperCase());
+		String dayType = switch (day) {
+		    case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "Weekday";
+		    case SATURDAY, SUNDAY -> "Weekend";
+		    default ->{yield "NoDay";}
+		};
+		System.out.println(dayType); // Output: Weekday for Monday
+
+
+	}
+}
