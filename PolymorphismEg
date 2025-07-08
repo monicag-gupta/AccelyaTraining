@@ -1,0 +1,67 @@
+package Day1;
+class A{
+	public void fn1() {
+		System.out.println("fn1 in A");
+	}
+	public void fn() {
+		System.out.println("fn in A");
+	}
+}
+class B extends A{
+	//@Override
+	public void fn(int x) {
+		System.out.println("fn in B");
+	}
+	public void fn2() {
+		System.out.println("fn in B");
+	}
+}
+
+class C{
+//	public int print() { //case 0
+//		System.out.println("Print()");
+//	}
+	
+	public void print() { //case 1
+		System.out.println("Print()");
+	}
+	public void print(int i) { //case2 : overload with 1, no of parameter diff
+		System.out.println("Print(int)");
+	}
+	public void print(int i, String s) { //case3 : overload with 1 and 2, no of parameter diff
+		System.out.println("Print(int, String)");
+	}
+	public void print(String i, int s) { //case4 : overload with 1 and 2, no of parameter diff, with 3 as sequence of param are diff
+		System.out.println("Print(String, int)");
+	}
+	public void print(String s) { //case5 : overload with 1, 3, 4, no of parameter diff, 2 as datatype is diff
+		System.out.println("Print(String)");
+	}
+}
+
+
+public class PolyEg {
+
+	public static void main(String[] args) {
+		A a=new B();
+		a.fn();
+		a.fn1();
+		B b=(B)a;
+		b.fn(12);
+		b.fn();
+		b.fn1();
+		b.fn2();
+		//B b2=(B)new A();
+		//b2.fn(89);
+//		a.fn(89);
+		C c=new C();
+		c.print();
+		c.print(10);
+		c.print("");
+		c.print(10, "");
+		c.print("", 10);
+		
+
+	}
+
+}
