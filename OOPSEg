@@ -1,0 +1,197 @@
+package Day1;
+interface I1{
+	void fn();
+}
+interface OS{
+	void cmd();
+	void gui();
+	default void auth() {
+		System.out.println("This is default OS auth");
+	}
+}
+interface DeviceType{
+	void ScreenSize();
+	default void auth() {
+		System.out.println("This is default device auth");
+	}
+}
+abstract class WinOS implements OS, DeviceType{
+	public void cmd() {
+		System.out.println("Command Line");
+	}
+	public abstract void OSType();
+	public void auth() {
+		System.out.println("This is Win auth");
+	}
+}
+abstract class LinuxOS implements OS, DeviceType{
+	public void cmd() {
+		System.out.println("Terminal");
+	}
+	public abstract void OSType();
+	public void auth() {
+		System.out.println("This is UNIX auth");
+	}
+}
+
+class PaidWinOS extends WinOS{
+
+	@Override
+	public void gui() {
+		System.out.println("Win GUI");
+		
+	}
+
+	@Override
+	public void ScreenSize() {
+		System.out.println("Laptop");
+		
+	}
+
+	@Override
+	public void OSType() {
+		System.out.println("Windows");
+		
+	}
+	public void PaidFacility() {
+		System.out.println("Facilities");
+	}
+	
+}
+
+
+class UrbuntoOS extends LinuxOS{
+
+	@Override
+	public void gui() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ScreenSize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void OSType() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
+class OOP{ //Encapsulated class
+	
+	private String privateStr; //Encapsulation : Data Hiding
+	protected String protectedStr;
+	String defaultStr;
+	public void readName() { //abstraction : public
+		System.out.println("Enter privateStr:");
+		privateStr = new java.util.Scanner(System.in).nextLine();
+		System.out.println("privateStr : " + privateStr);
+	}
+	public String publicStr;
+	public OOP() {
+		publicStr="Private : " + privateStr+" Protected : " + protectedStr+ " Default : " + defaultStr;
+	}
+	
+}
+
+
+public class OOPsEg {
+
+	public static void main(String[] args) {
+		WinOS win=new PaidWinOS();
+		OS unix = new UrbuntoOS();
+		
+		
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+package Day1;
+
+interface Animal {
+	void move();
+}
+
+abstract class Birds implements Animal { // move, hollowbones
+	public abstract void hollowBones();
+}
+
+abstract class LandAnimal implements Animal { // move, eat
+	public abstract void eat();
+}
+
+class Parrot extends Birds { // move, hollowbones, color
+
+	@Override
+	public void move() {
+		System.out.println("Parrot Moving");
+
+	}
+
+	@Override
+	public void hollowBones() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void color() {
+
+	}
+
+}
+
+class Dog extends LandAnimal {
+
+	@Override
+	public void move() {
+		System.out.println("Dog Moving");
+
+	}
+
+	@Override
+	public void eat() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void bark() {
+	}
+
+}
+
+public class Main {
+
+	public static void main(String[] args) {
+		Animal a1 = new Dog(); // upcasting
+		a1.move();
+		Birds b1 = new Parrot();
+		b1.move();
+		b1.hollowBones();
+		if (a1 instanceof Dog) {
+			Dog d = (Dog) a1; // downcasting
+			d.bark();
+		}
+		if (a1 instanceof Parrot) {
+			Parrot p = (Parrot) a1;
+			p.color();
+		}
+
+	}
+
+}
