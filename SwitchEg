@@ -23,3 +23,28 @@ public class SwitchEg {
 
 
 
+
+
+package Day1;
+import java.util.Scanner;
+public class SwitchEg2 {
+	public static void main(String[] args) {
+		System.out.print("Enter Week day's number: ");
+		int day;
+		day = (new Scanner(System.in)).nextInt();
+		String dayName = switch (day) {
+		    case 1 -> "Monday";
+		    case 2 -> "Tuesday";
+		    case 3 -> "Wednesday";
+		    case 4 -> "Thursday";
+		    case 5 -> "Friday";
+		    case 6 -> "Saturday";
+		    case 7 -> "Sunday";
+		    default -> "Invalid day";
+		};
+		System.out.println(dayName); // Output: Wednesday for day 3
+	}
+}
+
+
+
