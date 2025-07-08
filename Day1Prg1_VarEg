@@ -23,3 +23,13 @@ public class VarEg {
 	}
 
 }
+
+
+
+/*
+Instance Var: 0
+Class Var: 0
+Parameter Var : 10
+Instance Method: 100
+Local Var: 10
+*/
