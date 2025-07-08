@@ -1,0 +1,21 @@
+package aa;
+import java.util.Scanner;
+public class Hi {
+	public static void main(String[] args) {
+		System.out.print("Enter Week day's number: ");
+		int day;
+		day = (new Scanner(System.in)).nextInt();
+		String dayName;
+		switch (day) {
+		    case 1: dayName = "Monday";   break;
+		    case 2: dayName = "Tuesday";  break;
+		    case 3: dayName = "Wednesday";   break;
+		    case 4: dayName = "Thursday";   break;
+		    case 5: dayName = "Friday";     break;
+		    case 6: dayName = "Saturday";   break;
+		    case 7: dayName = "Sunday";   break;
+		    default:dayName = "Invalid day"; break;
+		}
+		System.out.println(dayName); // Output: Wednesday
+	}
+}
