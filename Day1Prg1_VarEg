@@ -1,0 +1,25 @@
+package Day1;
+class AAA{
+	public int instanceVar;  //default value for numerical variables are 0/0.0, for ref vars are null
+	public static int classVar; //default value for numerical variables are 0/0.0, for ref vars are null
+	public int square(int paramVar) {
+		System.out.println("Parameter Var : " + paramVar);
+		return paramVar*paramVar;
+	}
+}
+
+public class VarEg {
+
+	public static void main(String[] args) {
+		int localVar=10;
+		AAA a=new AAA();
+		System.out.println("Instance Var: " + a.instanceVar);
+		System.out.println("Class Var: " + AAA.classVar);
+		System.out.println("Instance Method: "+a.square(10));
+		System.out.println("Local Var: " + localVar);
+		
+		
+
+	}
+
+}
