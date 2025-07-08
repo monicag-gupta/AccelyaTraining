@@ -6,6 +6,23 @@ class AAA{
 		System.out.println("Parameter Var : " + paramVar);
 		return paramVar*paramVar;
 	}
+	@Override
+	public String toString() {
+		return "AAA [instanceVar=" + instanceVar + "]";
+	}
+	
+}
+
+class MyInt{
+	int myInt;
+	public MyInt(int l) {
+		myInt=l;
+	}
+	@Override
+	public String toString() {
+		return ""+myInt;
+	}
+	
 }
 
 public class VarEg {
@@ -17,9 +34,10 @@ public class VarEg {
 		System.out.println("Class Var: " + AAA.classVar);
 		System.out.println("Instance Method: "+a.square(10));
 		System.out.println("Local Var: " + localVar);
+		System.out.println(a);
 		
-		
-
+		MyInt m=new MyInt(localVar);
+		System.out.println("Wrapper for Int " + m);
 	}
 
 }
@@ -32,4 +50,6 @@ Class Var: 0
 Parameter Var : 10
 Instance Method: 100
 Local Var: 10
+AAA [instanceVar=0]
+Wrapper for Int 10
 */
