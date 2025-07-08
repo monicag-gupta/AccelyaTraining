@@ -1,0 +1,37 @@
+Data Type
+Characteristics
+Range
+Default Value (for fields)
+byte
+8 bit signed integer
+-128 to 127
+0
+short
+16 bit signed integer
+-32768 to 32767
+0
+int
+32 bit signed integer
+-2,147,483,648 to 2,147,483,647
+0
+long
+64 bit signed integer 
+-9,223,372,036,854,775,808 to- 9,223,372,036,854,775,807
+0L
+float
+32 bit floating point number
++ 1.4E-45 to+ 3.4028235E+38 
+0.0f
+double
+64 bit floating point number
++ 4.9E-324 to+ 1.7976931348623157E+308 
+0.0d
+boolean
+true or false
+NA, note Java booleans cannot be converted to or from other types
+false 
+char
+16 bit, Unicode
+Unicode character, \u0000 to \uFFFF Can mix with integer types
+'\u0000'
+
