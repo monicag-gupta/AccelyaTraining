@@ -6,3 +6,14 @@ email VARCHAR (355) UNIQUE NOT NULL,
 created_on TIMESTAMP NOT   NULL,
 last_login TIMESTAMP
 );
+
+
+SELECT *
+FROM information_schema.columns
+WHERE table_name = 'account';
+
+
+
+
+
+
