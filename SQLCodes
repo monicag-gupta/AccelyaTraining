@@ -143,5 +143,7 @@ update company6 set salary=-10000 where id=104;
 
 
 
+ALTER TABLE company6 DROP CONSTRAINT company6_salary_check;
+
 
 
