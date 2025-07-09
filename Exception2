@@ -34,3 +34,71 @@ public class ExceptPropagateEg {
 	}
 
 }
+
+
+
+
+package Day1;
+import java.sql.*;
+import java.io.*;
+class Pa{
+	public void unchkExcept() throws ArithmeticException{
+		System.out.println("unchkExcept");
+	}
+	public void chkExcept() throws SQLException{
+		System.out.println("chkExcept");
+	}
+	public void chkExcept2() throws Exception{
+		System.out.println("chkExcept");
+	}
+	public void noExcept() {
+		System.out.println("noExcept");
+	}
+}
+class Son extends Pa{
+	@Override
+	public void noExcept() throws ArithmeticException{  //no Problem
+		System.out.println("noExcept");
+	}
+	@Override
+	public void unchkExcept() throws IndexOutOfBoundsException{//no Problem
+		System.out.println("unchkExcept");
+	}
+//	@Override
+//	public void chkExcept() throws SQLException{ //possible
+//		System.out.println("chkExcept");
+//	}
+	
+//	@Override
+//	public void chkExcept() { //throws Exception{ // not possible
+//		System.out.println("chkExcept");
+//	}
+	@Override
+	public void chkExcept() throws ArithmeticException{ //possible
+		System.out.println("chkExcept");
+	}
+	@Override
+	public void chkExcept2() throws IOException{ //possible
+		System.out.println("chkExcept");
+	}
+}
+class Daughter extends Pa{
+	@Override
+	public void noExcept() { //throws SQLException{  //not Possible
+		System.out.println("noExcept");
+	}
+	@Override
+	public void unchkExcept() { // throws SQLException {//not Possible
+		System.out.println("unchkExcept");
+	}
+}
+
+public class ExceptInheritEg {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
