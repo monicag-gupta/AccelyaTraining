@@ -105,3 +105,17 @@ select * from company1;
 
 
 
+
+Drop table if exists company2;
+CREATE TABLE COMPANY2(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    unique,
+   SALARY         REAL
+);
+insert into company2 values(101, 'A1',10000);
+insert into company2(id, salary) values(102,20000);
+insert into company2(id, name) values(103,'A2');
+insert into company2(id, salary) values(104,20000);
+insert into company2 values(105, 'A1',10000);
+select * from company2;
+
