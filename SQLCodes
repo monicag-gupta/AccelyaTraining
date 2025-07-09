@@ -125,6 +125,21 @@ insert into company2(name, salary) values('A2',8000);
 
 
 
+CREATE TABLE COMPANY6(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    NOT NULL,
+   SALARY         REAL    CHECK(SALARY > 0)
+);
+
+insert into company6 values(101,'A1',10000);
+insert into company6(id,name) values(102,'A3');
+
+insert into company6 values(104,'A2',-10000);
+ERROR:  new row for relation "company6" violates check constraint "company6_salary_check"
+DETAIL:  Failing row contains (104, A2, -10000).
+
+insert into company6 values(104,'A2',10000);
+update company6 set salary=-10000 where id=104;
 
 
 
