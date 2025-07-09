@@ -62,6 +62,7 @@ VALUES
 
 
 
+SELECT [ ALL | DISTINCT | DISTINCT ON (distinct_expressions) ] expressions FROM tables [WHERE conditions] [GROUP BY expressions] [HAVING condition] [ORDER BY expression [ ASC | DESC | USING operator ] [ NULLS FIRST | NULLS LAST ]] [LIMIT [ number_rows | ALL] [OFFSET offset_value [ ROW | ROWS ]] [FETCH { FIRST | NEXT } [ fetch_rows ] { ROW | ROWS } ONLY] [FOR { UPDATE | SHARE } OF table [ NOWAIT ]];
 
 
 
