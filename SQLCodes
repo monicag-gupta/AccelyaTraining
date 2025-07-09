@@ -178,7 +178,11 @@ INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID) VALUES (7, 'HR', 20 );
 SELECT C.Dept AS Dept_Name FROM Department AS C, DEPARTMENT AS D WHERE C.ID = D.EMP_ID;
 
 
+create table Emp12345678(id int, sal int, mngr int);
 
+insert into Emp12345678 values(1,2,5),(2,5,5),(3,6,1),(4,8,2),(5,10,4);
+
+select e1.sal from Emp12345678 as e1 join Emp12345678 e2 on e1.id = e2.mngr where e2.id=2;
 
 
 
