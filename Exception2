@@ -1,0 +1,36 @@
+package Day1;
+
+import java.sql.*;
+
+class SQLCON{
+	public String connection(String s) throws SQLException {
+		String ss=s;
+		if(ss.equals("")) {
+			throw new SQLException("This is in SQLCON->connection");
+		}
+		else 
+			return ss;
+	}
+}
+
+class DAO{
+	public String CRUD() throws SQLException{
+		String c=new SQLCON().connection("");
+		return c;
+		
+	}
+}
+
+public class ExceptPropagateEg {
+
+	public static void main(String[] args) {
+		try {
+		System.out.println(new DAO().CRUD());
+		}
+		catch(SQLException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+}
