@@ -1,0 +1,14 @@
+Design all the classes required for Airline System:
+TicketsPurchaseSystem
+Customer
+ItemsDetails
+InFlightFacilities
+AirlinesDetails
+AirlinesEmployeeDetails
+
+
+A library of classes (Services) using the above packages/classes
+A menu driven class for using the above services library
+
+
+Create SQL tables in PostgreSQL for all the above classes
