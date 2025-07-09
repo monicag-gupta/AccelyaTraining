@@ -119,3 +119,14 @@ insert into company2(id, salary) values(104,20000);
 insert into company2 values(105, 'A1',10000);
 select * from company2;
 
+insert into company2 values(101, 'A3',10000);
+
+insert into company2(name, salary) values('A2',8000);
+
+
+
+
+
+
+
+
