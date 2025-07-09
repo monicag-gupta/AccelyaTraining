@@ -14,6 +14,33 @@ WHERE table_name = 'account';
 
 
 
+CREATE TABLE COMPANY(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL, 
+ADDRESS CHAR(50),
+SALARY REAL,
+JOIN_DATE DATE
+);
+
+
+
+
+Insert Single row:
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES (1, 'Paul', 32, 'California', 20000.00 ,'2001-07-13');
+Insert default salary, column omitted:
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,JOIN_DATE) VALUES (2, 'Allen', 25, 'Texas', '2007-12-13');
+Insert default join_date with keyword DEFAULT:
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES (3, 'Teddy', 23, 'Norway', 20000.00, DEFAULT );
+Insert default join_date with keyword null:
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES (4, 'Ted', 23, 'Norway', 20000.00, null );
+Insert multiple rows together:
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) 
+VALUES 
+(5, 'Mark', 25, 'Rich-Mond ', 65000.00, '2007-12-13'), 
+(6, 'David', 27, 'Texas', 85000.00 , '2007-12-13'),
+(7, 'Marker', 25, 'Rich-Mond ', 65000.00, '2007-12-13');
+
 
 
 
