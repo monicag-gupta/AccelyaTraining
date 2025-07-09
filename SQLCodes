@@ -90,5 +90,8 @@ UPDATE COMPANY SET SALARY = 25000 WHERE ID = 3;
 
 update company set salary = salary * 1.1;
 
+DELETE FROM COMPANY WHERE ID = 2;
+
+
 
 
