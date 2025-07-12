@@ -219,3 +219,44 @@ public class PostgreSQLJDBCSelect {
 
 
 
+
+package Day4;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.*;
+
+public class PostgreSQLJDBCUpdate {
+	public static void main(String args[]) {
+		Connection c = null;
+		Statement stmt = null;
+		Scanner sc = new Scanner(System.in);
+		try {
+			Class.forName("org.postgresql.Driver");
+			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/training", "postgres", "root");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully");
+			System.out.println("Enter the ID to be updated:");
+			int idd = sc.nextInt();
+			System.out.println("Enter Salary to be updated: ");
+			float s = sc.nextFloat();
+			stmt = c.createStatement();
+//			String sql = "UPDATE COMPANY set SALARY = 25000.00 where ID=1;";
+			String sql = "UPDATE COMPANY set SALARY = " + s + " where ID = " + idd + ";";
+			stmt.executeUpdate(sql);
+			c.commit();
+			stmt.close();
+			c.close();
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+		System.out.println("Operation done successfully");
+		sc.close();
+	}
+}
+
+
+
