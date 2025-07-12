@@ -18,3 +18,37 @@ class AL1{
    }  
 }
 
+
+
+
+
+
+
+
+package Day2;
+
+import java.util.*;  
+class AL1{  
+   public static void main(String args[]){  
+      ArrayList<String> alist=new ArrayList<String>();  
+      alist.add("Steve");
+      alist.add("Tim");
+      alist.add("Lucy");
+      alist.add("Pat");
+      alist.add("Tom");
+       //displaying elements
+      System.out.println(alist);
+      //Adding "Steve" at the fourth position
+      alist.add(3, "Steve");
+      //displaying elements
+      System.out.println("Post adding at 3rd index\n" + alist);
+      alist.remove(1);
+      System.out.println("Post removing at 1st postion\n" + alist);
+   }  
+}
+
+
+
+
+
+
