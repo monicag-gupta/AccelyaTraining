@@ -296,6 +296,43 @@ public class SetEg {
 
 
 
+package Day2;
+
+import java.util.*;
+
+public class MapEg {
+	public static void main(String args[]) {
+		Map<String, String> fruit = new HashMap<String, String>();
+		fruit.put("Apple", "red");
+		fruit.put("Pear", "yellow");
+		fruit.put("Plum", "purple");
+		fruit.put("Cherry", "red");
+		fruit.put("Cherry", "deepred");
+		System.out.println("Key Set: " + fruit.keySet());
+		System.out.println("Value Collection: " + fruit.values());
+		System.out.println("Each Entry Set: " + fruit.entrySet());
+		System.out.println("\nThe Fruits are: ");
+		for (String key : fruit.keySet()) {
+			System.out.println(key + ": " + fruit.get(key));
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
