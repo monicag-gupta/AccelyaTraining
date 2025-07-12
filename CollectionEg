@@ -513,6 +513,75 @@ public class ComplexEg {
 
 
 
+package Day2;
+
+import java.util.*;
+
+class Emp implements Comparable<Emp>
+{
+	int id;
+	String name;
+	public Emp() {}
+	public Emp(String name, int id) {
+		this.name=name;
+		this.id=id;
+	}
+	public String toString() {
+		return "\n" + this.hashCode() + "   " + name + " " + id;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		Emp other=(Emp) obj;
+		return this.id==other.id;
+	}
+	//@Override
+	public int compareTo(Emp o) {
+		return  o.name.length() -name.length();
+	}
+	
+}
+
+class CompareEmp implements Comparator<Emp>{
+
+	@Override
+	public int compare(Emp o1, Emp o2) {
+		// TODO Auto-generated method stub
+		return o1.name.compareTo(o2.name);
+	}
+	
+}
+
+public class ComplexEg {
+
+	public static void main(String[] args) {
+		Set<Emp> ts = new HashSet<>();
+		ts.add(new Emp("JohnnyJohhny",101));
+		ts.add(new Emp("Janes",102));
+		ts.add(new Emp("Acedscjhsdbvjhxcknvkj",104));
+		ts.add(new Emp("Smith",101));
+		System.out.println(ts);
+		
+		TreeSet<Emp> tss=new TreeSet<>(ts);
+		System.out.println(tss);
+		ArrayList<Emp> al=new ArrayList<Emp>(ts);
+		Collections.sort(al);
+		System.out.println(al);
+		Collections.sort(al, new CompareEmp());
+		System.out.println(al);
+		
+
+	}
+
+}
+
+
+
+
+
 
 
 
