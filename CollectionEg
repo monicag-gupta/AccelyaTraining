@@ -397,6 +397,48 @@ public class StreamEg {
 
 
 
+package Day2.extras;
+import java.util.function.*;
+
+public class LambdaFnEg {
+
+	public static void main(String[] args) {
+		BiFunction<Integer, Integer, Integer> add=(x,y)-> x+y;
+		BiFunction<Integer, Integer, Integer> sub=(x,y)-> x-y;
+		System.out.println(add.apply(3,4));
+		
+		Predicate<Integer> grTh50= (x) -> x>50; 
+		System.out.println(grTh50.test(100)); //true
+		
+		Consumer<String> print = (x) -> System.out.println(x);
+		print.accept("Hi"); //Hi
+		
+		Supplier<Integer> give = () -> 100;
+		System.out.println(give.get()); //100
+		
+		Function<String, Integer> lenn=(x)->x.length();
+		
+		System.out.println(lenn.apply("Hello World"));
+		
+		
+		
+	}
+
+}
+
+
+
+
+
+
+Predicate<T> -> Boolean test(T o)
+Consumer<T> -> void accept(T o)
+Supplier<T> -> T get()
+Function<T, R> -> R apply(T o)
+
+
+
+
 
 
 
