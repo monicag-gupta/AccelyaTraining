@@ -331,6 +331,147 @@ public class JdbcInsertDemoPS {
 
 
 
+package Day4;
+
+public class company {
+	private int id;
+	private String name;
+	private int age;
+	private String address;
+	private float salary;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public float getSalary() {
+		return salary;
+	}
+	public void setSalary(float salary) {
+		this.salary = salary;
+	}
+	public company(int id, String name, int age, String address, float salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.address = address;
+		this.salary = salary;
+	}
+	
+	public company() {}
+	
+	@Override
+	public String toString() {
+		return "("+  id +",'"+ name + "', " + age + ", '" + address + "', " + salary + ")";
+	}
+	
+}
+
+
+
+
+
+
+
+
+package Day4;
+import java.sql.*;
+
+public class CompanyDAO {
+	private Connection c;
+	private Statement s;
+	public int insert(company company) throws Exception {
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/training", "postgres",
+				"root");
+		String sql="Insert into company values" + company;
+		s=c.createStatement();
+		int i= s.executeUpdate(sql);
+		return i;		
+	}
+	public int update(company company) throws Exception {
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/training", "postgres",
+				"root");
+		String sql="update company set salary = " + company.getSalary() + " where id ="+ company.getId();
+		s=c.createStatement();
+		int i= s.executeUpdate(sql);
+		return i;		
+	}
+	public int delete(int id) throws Exception {
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/training", "postgres",
+				"root");
+		String sql="delete from company where id ="+ id;
+		s=c.createStatement();
+		int i= s.executeUpdate(sql);
+		return i;		
+	}
+	
+	public void listCompany() throws Exception {
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/training", "postgres",
+				"root");
+		String sql="select * from company";
+		s=c.createStatement();
+		ResultSet rs= s.executeQuery(sql);
+		System.out.println("\n The Details: \n");
+		System.out.println("ID\tname\tage\taddress\tsalary");
+		while(rs.next()) {
+			company c=new company(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getInt(5));
+			System.out.println(c);
+		}
+		
+				
+	}
+	
+	
+
+}
+
+
+
+
+
+package Day4;
+
+public class ClientCode {
+
+	public static void main(String[] args) throws Exception{
+		company c=new company(101,"John",20,"US",2);
+		CompanyDAO dao=new CompanyDAO();
+		dao.insert(c);
+
+	}
+
+}
+
+
+
+
+
+
+
 
 
 
