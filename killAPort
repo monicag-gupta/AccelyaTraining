@@ -1,0 +1,6 @@
+netstat -ano | findstr "8080"
+
+We get a lot of PIDs
+Choose the PID with 8080 as used port
+
+taskkill /PID 10068 /F
