@@ -1,0 +1,17 @@
+Step 1: Create Spring Boot Project in Eclipse
+1. Open Eclipse
+2. Go to File → New → Spring Starter Project
+3. Enter the following:
+Name: SBHW
+Type: Maven
+Group: SBHWGr
+Artifact: SBHW
+Description: SB HW
+Package: SBHWGr.SBHW
+Packaging: Jar
+Java Version: 17 or higher
+Dependencies: Select only ✅ Spring Web
+4. Click Finish
+Eclipse will create and build the project.
+
+
