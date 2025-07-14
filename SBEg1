@@ -15,3 +15,23 @@ Dependencies: Select only ✅ Spring Web
 Eclipse will create and build the project.
 
 
+
+
+
+package SBHWGr.SBHW;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+
+    @GetMapping("/")
+    public String sayHello() {
+        return "Hello World from Spring Boot 3!";
+    }
+}
+
+
+
+
