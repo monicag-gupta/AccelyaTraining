@@ -124,20 +124,21 @@ import com.crudpg.model.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @Controller
 public class EmployeeController {
 
-    @Autowired
+   
     private final EmployeeDAO dao;
 
-    /*public EmployeeController(EmployeeDAO dao) {
+    public EmployeeController(EmployeeDAO dao) {
         this.dao = dao;
-    }*/
+    }
 
     @GetMapping
     public List<Employee> getAll() {
-        return dao.getAll();
+        return dao.findAll();
     }
 
     @PostMapping
