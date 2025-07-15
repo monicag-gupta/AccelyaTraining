@@ -134,7 +134,7 @@ public class EmployeeController {
         return emp;
     }
 
-     @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Employee update(@PathVariable int id, @RequestBody Employee emp) {
         if(id==emp.getId())
             dao.update(emp);
@@ -145,6 +145,11 @@ public class EmployeeController {
     public String delete(@PathVariable int id) {
         dao.delete(id);
         return "Deleted";
+    }
+
+    @GetMapping("/{id}")
+    public Employee findById(@PathVariable int id) {
+        return dao.getById(id);
     }
 }
 
