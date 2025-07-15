@@ -55,6 +55,60 @@ public class Employee {
 
 
 
+package com.simplecrud.service;
+
+import com.simplecrud.model.Employee;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+@Service
+public class EmployeeService {
+
+    private final List<Employee> employeeList = new ArrayList<>();
+    private int currentId = 1;
+
+    public List<Employee> getAll() {
+        return employeeList;
+    }
+
+    public Employee getById(int id) {
+        return employeeList.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Employee add(Employee emp) {
+        emp.setId(currentId++);
+        employeeList.add(emp);
+        return emp;
+    }
+
+    public Employee update(int id, Employee updatedEmp) {
+        for (Employee emp : employeeList) {
+            if (emp.getId() == id) {
+                emp.setName(updatedEmp.getName());
+                emp.setDepartment(updatedEmp.getDepartment());
+                return emp;
+            }
+        }
+        return null;
+    }
+
+    public boolean delete(int id) {
+        return employeeList.removeIf(emp -> emp.getId() == id);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 
