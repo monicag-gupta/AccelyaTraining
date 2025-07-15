@@ -16,3 +16,160 @@ CREATE TABLE employee (
 
 
 
+Spring Starter Project
+CRUDPostgre
+Group and package: com.crudpg
+Add Dependencies: PostgreSQL driver, Spring Web
+
+
+
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/training
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+
+
+package com.crudpg.model;
+
+public class Employee {
+    private int id;
+    private String name;
+    private String department;
+
+    // Getters and Setters
+}
+
+
+
+package com.crudpg.dao;
+
+import com.crudpg.model.Employee;
+import java.util.List;
+
+public interface EmployeeDAO {
+    void save(Employee emp);
+    void update(Employee emp);
+    void delete(int id);
+    Employee findById(int id);
+    List<Employee> findAll();
+}
+
+
+
+
+package com.crudpg.dao;
+
+import com.crudpg.model.Employee;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class EmployeeDAOImpl implements EmployeeDAO {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    public EmployeeDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public void save(Employee emp) {
+        String sql = "INSERT INTO employee (name, department) VALUES (?, ?)";
+        jdbcTemplate.update(sql, emp.getName(), emp.getDepartment());
+    }
+
+    public void update(Employee emp) {
+        String sql = "UPDATE employee SET name=?, department=? WHERE id=?";
+        jdbcTemplate.update(sql, emp.getName(), emp.getDepartment(), emp.getId());
+    }
+
+    public void delete(int id) {
+        jdbcTemplate.update("DELETE FROM employee WHERE id=?", id);
+    }
+
+    public Employee findById(int id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM employee WHERE id=?",
+                new BeanPropertyRowMapper<>(Employee.class), id);
+    }
+
+    public List<Employee> findAll() {
+        return jdbcTemplate.query("SELECT * FROM employee",
+                new BeanPropertyRowMapper<>(Employee.class));
+    }
+}
+
+
+
+
+
+package com.crudpg.controller;
+
+import com.crudpg.dao.EmployeeDAO;
+import com.crudpg.model.Employee;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class EmployeeController {
+
+    private final EmployeeDAO dao;
+
+    public EmployeeController(EmployeeDAO dao) {
+        this.dao = dao;
+    }
+
+    @GetMapping
+    public List<Employee> getAll() {
+        return dao.getAll();
+    }
+
+    @PostMapping
+    public Employee create(@RequestBody Employee emp) {
+        dao.save(emp);
+        return emp;
+    }
+
+     @PutMapping("/{id}")
+    public Employee update(@PathVariable int id, @RequestBody Employee emp) {
+        if(id==emp.getId())
+            dao.update(emp);
+        return emp;
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id) {
+        dao.delete(id);
+        return "Deleted";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
