@@ -161,7 +161,7 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public Employee findById(@PathVariable int id) {
-        return dao.getById(id);
+        return dao.findById(id);
     }
 }
 
