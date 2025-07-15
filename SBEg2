@@ -156,5 +156,54 @@ public class EmployeeController {
 
 
 
+Right - click the project
+Run As -> Maven Clean
+Run As -> Maven Install
+Run As -> Spring Boot Run
+Open Postman
+
+
+
+
+
+
+Run 1: 
+
+Put URL: 
+Post : http://localhost:8080/api/employees 
+, Request type POST. 
+In Body of Request  -> Raw -> JSON ->  Add content
+
+{ "name": "Alice", "department": "HR" }
+
+Run 2:
+
+{ "name": "John", "department": "IT" }
+
+
+
+
+Get:
+http://localhost:8080/api/employees
+
+
+Get-> http://localhost:8080/api/employees/1
+
+
+
+Put -> http://localhost:8080/api/employees/1
+
+Run with body:
+{ "name": "Alice Updated", "department": "Finance" }
+
+
+
+Delete -> http://localhost:8080/api/employees/1
+
+
+
+
+
+
 
 
