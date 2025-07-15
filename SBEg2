@@ -1,0 +1,11 @@
+Go to: File > New > Spring Starter Project
+Fill in:
+Project Name: SimpleCrudInMemory
+Type: Maven
+Packaging: Jar
+Java version: 17 or 21
+Group id: com.simplecrud
+Package name: com.simplecrud
+Select dependencies:
+Spring Web
+
