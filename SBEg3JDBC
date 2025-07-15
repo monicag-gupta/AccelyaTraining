@@ -1,5 +1,18 @@
+
+
+Open Query Tool in pgAdmin4 for postgre database
+create database training;
+
+
+Refresh Databases (in the schema Information)
+Open Query Tool in pgAdmin4 for training database
+
+
 CREATE TABLE employee (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     department VARCHAR(100)
 );
+
+
+
