@@ -13,7 +13,7 @@ CREATE TABLE employee (
     name VARCHAR(100),
     department VARCHAR(100)
 );
-
+insert into employee(name,department) values ('Alice', 'HR'),('John','IT'),('Jane','IT');
 
 
 Spring Starter Project
