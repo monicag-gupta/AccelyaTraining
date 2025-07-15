@@ -5,5 +5,273 @@ Group name: com.hbm.pg
 
 
 
+<dependencies>
+        <!-- Hibernate Core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.6.15.Final</version>
+        </dependency>
+
+        <!-- PostgreSQL JDBC Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.1</version>
+        </dependency>
+
+        <!-- JPA API (optional but useful) -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.4.3.Final</version>
+        </dependency>
+    </dependencies>
+
+
+
+
+
+
+
+application.properties
+
+
+# PostgreSQL Connection
+hibernate.connection.driver_class=org.postgresql.Driver
+hibernate.connection.url=jdbc:postgresql://localhost:5432/tempdb
+hibernate.connection.username=postgres
+hibernate.connection.password=root
+
+# Hibernate Settings
+hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+hibernate.hbm2ddl.auto=update
+hibernate.show_sql=true
+hibernate.format_sql=true
+
+# Entity Class (optional for annotation config)
+hibernate.current_session_context_class=thread
+
+
+
+
+
+
+package com.hbm.pg.model;
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "employee")
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(length = 100)
+    private String name;
+
+    @Column(length = 100)
+    private String department;
+
+    // Constructors
+    public Employee() {}
+
+    public Employee(String name, String department) {
+        this.name = name;
+        this.department = department;
+    }
+
+    // Getters and setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getDepartment() { return department; }
+    public void setDepartment(String department) { this.department = department; }
+
+    @Override
+    public String toString() {
+        return "Employee [id=" + id + ", name=" + name + ", department=" + department + "]";
+    }
+}
+
+
+
+
+
+
+
+
+package com.hbm.pg;
+
+
+import java.util.Properties;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
+
+import com.hbm.pg.model.Employee;
+
+public class HibernateUtil {
+
+    private static SessionFactory sessionFactory;
+
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                Configuration configuration = new Configuration();
+
+                // Load properties manually
+                Properties settings = new Properties();
+                settings.load(HibernateUtil.class.getClassLoader()
+                              .getResourceAsStream("application.properties"));
+
+                configuration.setProperties(settings);
+
+                // Add annotated classes
+                configuration.addAnnotatedClass(Employee.class);
+
+                sessionFactory = configuration.buildSessionFactory();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return sessionFactory;
+    }
+}
+
+
+
+
+
+
+
+package com.hbm.pg;
+
+
+
+import com.hbm.pg.model.Employee;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class MainApp {
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int choice;
+        do {
+            System.out.println("\n=== Employee Management Menu ===");
+            System.out.println("1. Add Employee");
+            System.out.println("2. View All Employees");
+            System.out.println("3. Update Employee");
+            System.out.println("4. Delete Employee");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+            choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1: addEmployee(); break;
+                case 2: viewEmployees(); break;
+                case 3: updateEmployee(); break;
+                case 4: deleteEmployee(); break;
+                case 0: System.out.println("Exiting."); break;
+                default: System.out.println("Invalid choice.");
+            }
+
+        } while (choice != 0);
+
+        scanner.close();
+    }
+
+    private static void addEmployee() {
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter department: ");
+        String dept = scanner.nextLine();
+
+        Employee emp = new Employee(name, dept);
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            session.save(emp);
+            tx.commit();
+            System.out.println("Employee added with ID: " + emp.getId());
+        }
+    }
+
+    private static void viewEmployees() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            List<Employee> list = session.createQuery("from Employee", Employee.class).list();
+            if (list.isEmpty()) {
+                System.out.println("No employees found.");
+            } else {
+                list.forEach(System.out::println);
+            }
+        }
+    }
+
+    private static void updateEmployee() {
+        System.out.print("Enter ID of employee to update: ");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Employee emp = session.get(Employee.class, id);
+            if (emp == null) {
+                System.out.println("Employee not found.");
+                return;
+            }
+
+            System.out.print("Enter new name (current: " + emp.getName() + "): ");
+            emp.setName(scanner.nextLine());
+
+            System.out.print("Enter new department (current: " + emp.getDepartment() + "): ");
+            emp.setDepartment(scanner.nextLine());
+
+            Transaction tx = session.beginTransaction();
+            session.update(emp);
+            tx.commit();
+            System.out.println("Employee updated.");
+        }
+    }
+
+    private static void deleteEmployee() {
+        System.out.print("Enter ID of employee to delete: ");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Employee emp = session.get(Employee.class, id);
+            if (emp == null) {
+                System.out.println("Employee not found.");
+                return;
+            }
+
+            Transaction tx = session.beginTransaction();
+            session.delete(emp);
+            tx.commit();
+            System.out.println("Employee deleted.");
+        }
+    }
+}
+
+
+
+
 
 
