@@ -9,3 +9,17 @@ Package name: com.simplecrud
 Select dependencies:
 Spring Web
 
+
+
+
+
+com.simplecrud
+├── controller
+│   └── EmployeeController.java
+├── model
+│   └── Employee.java
+├── service
+│   └── EmployeeService.java
+└── SimpleCrudInMemoryApplication.java
+
+
