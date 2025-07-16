@@ -240,6 +240,67 @@ public class EmployeeService {
 
 
 
+package com.employee.controller;
+
+import com.employee.model.Employeetbl;
+import com.employee.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeeController {
+
+    @Autowired
+    private EmployeeService service;
+
+    @PostMapping
+    public Employeetbl create(@RequestBody Employeetbl emp) {
+        return service.create(emp);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Employeetbl> getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    @GetMapping
+    public Page<Employeetbl> getAll(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "id") String sort
+    ) {
+        return service.getAll(page, size, sort);
+    }
+
+    @GetMapping("/filter")
+    public Page<Employeetbl> filterByDepartment(
+        @RequestParam String department,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size
+    ) {
+        return service.filterByDepartment(department, page, size);
+    }
+
+    @PutMapping("/{id}")
+    public Employeetbl update(@PathVariable Long id, @RequestBody Employeetbl emp) {
+        return service.update(id, emp);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+}
+
+
+
+
+
+
 
 
 
