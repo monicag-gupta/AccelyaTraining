@@ -56,3 +56,21 @@ INSERT INTO employeetbl (name, department, designation, salary, joining_date) VA
 
 
 
+
+
+
+SB Starter Project:
+
+Project name: EmployeeManager
+Package name: com.employee
+Spring Boot version: 3.2.x
+Dependencies:
+Spring Web
+Spring Data JPA
+PostgreSQL Driver
+
+
+
+
+
+
