@@ -319,7 +319,7 @@ Paginate all records
 http://localhost:8080/api/employees?department=Engineering&page=0&size=3
 department=Engineering&page=0&size=3
 
-
+http://localhost:8080/api/employees/filter?department=Engineering&page=0&size=3
 
 
 
