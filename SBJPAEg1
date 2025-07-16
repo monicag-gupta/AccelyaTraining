@@ -304,5 +304,43 @@ public class EmployeeController {
 
 
 
+1. POST /api/employees
+{
+  "name": "Alice",
+  "department": "Engineering",
+  "designation": "Developer",
+  "salary": 85000,
+  "joiningDate": "2021-04-15"
+}
+2. GET /api/employees
+Paginate all records
+	http://localhost:8080/api/employees?page=0&size=5&sort=name
+3. GET /api/employees/filter?
+http://localhost:8080/api/employees?department=Engineering&page=0&size=3
+department=Engineering&page=0&size=3
+
+
+
+
+
+
+4. PUT /api/employees/1
+Update employee with ID 1
+{
+  "name": "Alice J.",
+  "department": "Engineering",
+  "designation": "Senior Developer",
+  "salary": 95000,
+  "joiningDate": "2021-04-15"
+}
+5. DELETE /api/employees/1
+
+
+
+
+
+
+
+
 
 
