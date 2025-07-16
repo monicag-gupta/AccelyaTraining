@@ -1,0 +1,58 @@
+Study Spring framework 5:
+ChatGPT/Google
+Spring IOC
+Spring AOP
+
+
+
+Design all the classes required for Airline System:
+TicketsPurchaseSystem
+Customer
+ItemsDetails
+InFlightFacilities
+AirlinesDetails
+
+
+
+A library of classes (Services) using the above packages/classes
+A menu driven class for using the above services library
+
+
+Create SQL tables in PostgreSQL for all the above classes
+
+
+
+
+
+
+
+
+
+
+
+Design all the classes required for Airline System:
+TicketsPurchaseSystem
+Customer
+ItemsDetails
+InFlightFacilities
+AirlinesDetails
+
+
+
+A library of classes (Services) using the above packages/classes
+A menu driven class for using the above services library
+
+
+Create SQL tables in PostgreSQL for all the above classes
+
+Add:
+CabinClass: Economy/Business/PremiumEconomy
+ExtraBaggage
+Seats
+InFlightMeal
+
+SB: Prepare Rest services for all the above:
+USe Repositories handling the DBs
+Use Service Layer to get to the Repositories
+Create CRUD controller for all the Tables.
+
