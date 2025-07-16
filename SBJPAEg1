@@ -1,0 +1,58 @@
+Postgresql
+
+CREATE TABLE IF NOT EXISTS employeetbl (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    department VARCHAR(50),
+    designation VARCHAR(50),
+    salary NUMERIC(10,2),
+    joining_date DATE
+);
+
+
+
+INSERT INTO employeetbl (name, department, designation, salary, joining_date) VALUES
+('Alice Johnson', 'Engineering', 'Software Engineer', 75000.00, '2020-01-15'),
+('Bob Smith', 'Engineering', 'Senior Developer', 90000.00, '2018-03-20'),
+('Charlie Kim', 'HR', 'HR Manager', 65000.00, '2019-07-01'),
+('Diana Patel', 'Finance', 'Accountant', 60000.00, '2021-02-12'),
+('Ethan Lee', 'Marketing', 'Marketing Analyst', 58000.00, '2020-11-05'),
+('Fiona Brown', 'Sales', 'Sales Executive', 55000.00, '2021-04-18'),
+('George Clark', 'Engineering', 'DevOps Engineer', 85000.00, '2017-09-09'),
+('Hannah Wright', 'Finance', 'Financial Analyst', 70000.00, '2022-01-01'),
+('Ian Scott', 'Engineering', 'Backend Developer', 80000.00, '2019-10-10'),
+('Jane Evans', 'Engineering', 'Frontend Developer', 79000.00, '2020-12-03'),
+('Kyle Murphy', 'Support', 'Support Engineer', 50000.00, '2021-08-23'),
+('Laura James', 'HR', 'Recruiter', 54000.00, '2018-06-14'),
+('Mike Lewis', 'Engineering', 'Tech Lead', 98000.00, '2016-05-11'),
+('Nina Allen', 'Engineering', 'QA Engineer', 62000.00, '2021-03-30'),
+('Oscar Price', 'Finance', 'Senior Accountant', 74000.00, '2017-04-28'),
+('Paula Adams', 'Marketing', 'Content Strategist', 59000.00, '2022-02-07'),
+('Quincy Baker', 'Sales', 'Sales Manager', 72000.00, '2019-09-19'),
+('Rachel Carter', 'Support', 'Customer Success Manager', 67000.00, '2018-12-01'),
+('Steve Diaz', 'Engineering', 'Site Reliability Engineer', 88000.00, '2020-07-17'),
+('Tina Edwards', 'Finance', 'Controller', 94000.00, '2016-08-22'),
+('Umar Foster', 'Engineering', 'Cloud Engineer', 86000.00, '2021-06-05'),
+('Vera Graham', 'HR', 'Benefits Coordinator', 61000.00, '2020-10-10'),
+('Will Harris', 'Engineering', 'Mobile Developer', 77000.00, '2019-11-30'),
+('Xander Iqbal', 'Engineering', 'Security Engineer', 89000.00, '2020-09-21'),
+('Yara Jenkins', 'Marketing', 'Social Media Manager', 63000.00, '2022-03-15'),
+('Zane King', 'Sales', 'Account Executive', 71000.00, '2021-01-25'),
+('Alan Morgan', 'Engineering', 'AI Engineer', 95000.00, '2021-05-16'),
+('Bella Novak', 'Engineering', 'ML Engineer', 94000.00, '2022-04-10'),
+('Caleb Owen', 'Engineering', 'Data Engineer', 91000.00, '2020-06-18'),
+('Dana Parker', 'Engineering', 'Data Scientist', 97000.00, '2019-02-22'),
+('Eli Quinn', 'Engineering', 'Software Architect', 100000.00, '2015-11-12'),
+('Faith Rivera', 'Engineering', 'Junior Developer', 65000.00, '2022-01-05'),
+('Gavin Stone', 'Support', 'Support Manager', 62000.00, '2018-03-08'),
+('Hailey Turner', 'HR', 'HR Coordinator', 58000.00, '2020-07-21'),
+('Ivan Underwood', 'Engineering', 'Systems Engineer', 83000.00, '2019-05-26'),
+('Jade Valdez', 'Sales', 'Territory Manager', 74000.00, '2021-12-02'),
+('Karan White', 'Marketing', 'Email Marketing Specialist', 61000.00, '2022-06-10'),
+('Lena Xiong', 'Finance', 'Junior Analyst', 56000.00, '2021-10-19'),
+('Mason Young', 'Engineering', 'Automation Engineer', 81000.00, '2018-01-28'),
+('Nora Zimmerman', 'Engineering', 'Embedded Systems Engineer', 87000.00, '2019-08-03');
+
+
+
+
