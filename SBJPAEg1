@@ -190,6 +190,55 @@ public interface EmployeeRepository extends JpaRepository<Employeetbl, Long> {
 
 
 
+package com.employee.service;
+
+import com.employee.model.Employeetbl;
+import com.employee.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class EmployeeService {
+
+    @Autowired
+    private EmployeeRepository repo;
+
+    public Employeetbl create(Employeetbl employee) {
+        return repo.save(employee);
+    }
+
+    public Optional<Employeetbl> getById(Long id) {
+        return repo.findById(id);
+    }
+
+    public Page<Employeetbl> getAll(int page, int size, String sortField) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortField).ascending());
+        return repo.findAll(pageable);
+    }
+
+    public Page<Employeetbl> filterByDepartment(String department, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repo.findByDepartmentContainingIgnoreCase(department, pageable);
+    }
+
+    public Employeetbl update(Long id, Employeetbl emp) {
+        emp.setId(id);
+        return repo.save(emp);
+    }
+
+    public void delete(Long id) {
+        repo.deleteById(id);
+    }
+}
+
+
+
+
+
+
 
 
 
