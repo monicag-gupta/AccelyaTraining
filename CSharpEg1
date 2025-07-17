@@ -68,3 +68,111 @@ namespace Prj1
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using System;
+
+namespace Prj1
+{
+ class A
+    {
+        public int x;
+        public int y;
+
+    }   
+    public class Program
+    {
+        static void sum(int x, int y, A a)  // x, y are called by value, A is called by Ref
+        {
+         
+            Console.WriteLine(x + y);
+
+            Console.WriteLine(a.x + a.y);
+            x = 70;
+            y = 90;
+            a.x = 70;
+            a.y = 90;
+
+
+        }
+        static void sumIn(in int x, in int y)
+        {
+            Console.WriteLine(x + y);
+            //x = 70;
+        }
+
+        static void sumInOut(in int x, out int sq, out int cub)
+        {
+            //int z = sq;
+            // Console.WriteLine(x + y);
+            sq = x * x;
+            cub = x * x * x;
+            //x = 70;
+        }
+
+        static void sumRef(ref int x, ref int y)
+        {
+            Console.WriteLine(x + y);       
+            x = 700;
+            y = 900;
+
+        }
+
+        public static void Main(string[] args) {
+            A a = new A();
+            int x, y;
+            x = 10; y = 20;
+            a.x = 10;
+            a.y = 20;
+            Console.WriteLine("Before sum\n"+ (x + y));
+
+            Console.WriteLine(a.x + a.y);
+            sum(x, y, a);
+            Console.WriteLine("After sum\n" + (x + y));
+
+            Console.WriteLine(a.x + a.y);
+
+            sumIn(in x, in y);
+            int sq, c;
+            sumInOut(in x,out sq,out c);
+            Console.WriteLine("Sq is: " + sq + " cub is : " + c);
+
+            Console.WriteLine("Before sum\n" + (x + y));            
+            sumRef(ref x, ref y);
+            Console.WriteLine("After sum\n" + (x + y));
+
+        }
+    }
+}
+
+
+
+/*
+ * Before sum
+30
+30
+30
+30
+After sum
+30
+160
+30
+Sq is: 100 cub is : 1000
+Before sum
+30
+30
+After sum
+1600
+*/
