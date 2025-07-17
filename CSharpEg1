@@ -1,0 +1,63 @@
+using System;
+
+namespace Prj1
+{
+    class Animal
+    {
+        public void move()
+        {
+            Console.WriteLine("All Animals move");
+        }
+    }
+    class Dog : Animal
+    {
+        public void bark()
+        {
+            Console.WriteLine("All Dogs bark");
+        }
+    }
+    class Cat : Animal
+    {
+        public void meow()
+        {
+            Console.WriteLine("All Cats Meow");
+        }
+    }
+    public class Program
+    {
+        static void animalfn(Animal a)
+        {
+            a.move();
+            if(a is Dog)
+            {
+                Dog d= (Dog)a;
+                d.bark();
+            }
+            if (a is Cat)
+            {
+                Cat c = (Cat)a;
+                c.meow();
+            }
+        }
+        public static void Main(string[] args) {
+
+            animalfn(new Animal());
+            animalfn(new Dog());
+            animalfn(new Cat());
+
+            Animal a = new Dog();
+
+            //if a is a Dog, d = a else d= null
+            Dog d = null;
+            if(a is Dog)
+            {
+                d = (Dog)a;
+            }
+
+            Dog dd = a as Dog;  //if a is dog, dd=a else dd=null
+            Dog dddd = a is Dog ? (Dog)a : null;
+        
+        
+        }
+    }
+}
