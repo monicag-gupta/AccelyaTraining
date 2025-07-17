@@ -56,7 +56,14 @@ namespace Prj1
 
             Dog dd = a as Dog;  //if a is dog, dd=a else dd=null
             Dog dddd = a is Dog ? (Dog)a : null;
-        
+
+            
+            int? i = null;
+            i = 20;
+
+            string s = null;
+            string n = s ?? "Hi";
+
         
         }
     }
