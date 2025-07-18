@@ -176,3 +176,57 @@ Before sum
 After sum
 1600
 */
+
+
+
+
+
+
+
+
+
+using Prj1;
+using System;
+
+namespace Prj1
+{
+    class Emp
+    {
+        private int _age;
+        public int Age
+        {
+            get
+            {
+                return _age;
+            }
+            set
+            {
+                if (value < 0 || value > 150)
+                {
+                    Console.WriteLine("Negative Age or Age beyond 150 yrs not allowed for an Emp");
+                    _age = 0;
+                }
+                else
+                    _age = value;
+            }
+        }
+
+            public string Name { get; set; }
+        }
+    }
+ 
+    public class Program
+    {
+        
+        public static void Main(string[] args) {
+           Emp emp=new Emp();
+            emp.Age = 180;  // set
+            Console.WriteLine(emp.Age); //get
+
+        }
+    }
+
+
+
+
+
