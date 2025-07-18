@@ -135,6 +135,71 @@ namespace WebAPI_Prj1.Models
 
 
 
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using WebAPI_Prj1.Models;
+
+namespace WebAPI_Prj1.Controllers
+{
+        [ApiController]
+        [Produces("application/json")]
+        [Route("api/Students")] //[Route("api/[controller]")]
+        public class StudentsController : ControllerBase
+        {
+            private static StudentContext students = new StudentContext();
+            [HttpGet]//[Route("api/Students")]
+            public ActionResult<IEnumerable<Student>> GetAllStudents()
+            {
+                return students.GetAllStudent();
+            }
+            [HttpGet("{id:int}")]
+            public ActionResult<Student> GetStudentById(int id)
+            {
+                return students.GetStudent(id);
+            }
+            [HttpPut("updateStd/{id:int}")]
+            public ActionResult<Student> UpdateStudent([FromRoute] int id, [FromBody] Student student)
+            {
+                try
+                {
+                    if (id != student.StudentId)
+                        return BadRequest("Student ID mismatch");
+                    var stdToUpdate = students.GetStudent(id);
+                    if (stdToUpdate == null)
+                        return NotFound($"Student with Id = {id} not found");
+                    return students.UpdateStudent(id, student);
+                }
+                catch (Exception)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                        "Error updating data");
+                }
+            }
+            [HttpDelete("DeleteStd/{id:int}")]
+            public ActionResult<String> DeleteStudentById(int id)
+            {
+                return students.DeleteStudent(id).ToString() + " Deleted successfully!";
+            }
+            [HttpPost]
+            public string InsertStudent(Student std)
+            {
+                return students.InsertStudent(std);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
