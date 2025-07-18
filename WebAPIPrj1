@@ -26,6 +26,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     // app.MapOpenApi();
+
+//Add here
     app.UseSwagger();
     app.UseSwaggerUI();
 
