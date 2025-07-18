@@ -264,3 +264,65 @@ namespace Prj1
 
 
 
+using Prj1;
+using System;
+
+namespace Prj1
+{
+    class Person
+    {
+        public void eat()
+        {
+            Console.WriteLine("All People Eat");
+        }
+        public virtual void work()
+        {
+            Console.WriteLine("Person Working");
+        }
+    }
+
+
+    class Emp : Person
+    {
+        public void eat()
+        {
+            Console.WriteLine("All Employees Eat");
+        }
+        public override void work()
+        {
+            Console.WriteLine("Employee Working");
+        }
+
+
+        //public override string? ToString()
+        //{
+        //    return "";
+        //}
+    }
+
+
+    public class Program
+    {
+
+        public static void Main(string[] args)
+        {
+            Person person = new Person();
+            person.eat();
+            person.work();
+            Person emp = new Emp();
+            emp.eat();
+            emp.work();
+            Emp emp1 = new Emp();
+            emp1.eat();
+            emp1.work();
+
+        }
+    }
+}
+
+
+
+
+
+
+
