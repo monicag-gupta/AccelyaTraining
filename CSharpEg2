@@ -1,0 +1,102 @@
+namespace Lib
+{
+    public class Pa
+    {
+        public void publicFn()  // accessed from anywhere
+        {
+            Console.WriteLine("This is publicFn() in Pa");
+        }
+        private void privateFn()  // accessed in the same class only
+        {
+            Console.WriteLine("This is privatecFn() in Pa");
+        }
+        protected void protectedFn()  // accessed in the same family (inherited) only
+        {
+            Console.WriteLine("This is protectedFn() in Pa");
+        }
+
+        internal void internalFn()  // accessed in the same project
+        {
+            Console.WriteLine("This is internalFn() in Pa");
+        }
+
+        internal protected void internalprotectedFn()  // accessed in the same project and in same family
+        {
+            Console.WriteLine("This is internalprotectedFn() in Pa");
+        }
+
+
+        public void call()
+        {
+            publicFn();
+            privateFn();
+            protectedFn();
+            internalFn();
+            internalprotectedFn();
+
+        }
+
+    }
+}
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lib
+{
+    public class ChildInLib : Pa
+    {
+        public void call()
+        {
+            publicFn();
+            //privateFn();
+            protectedFn();
+            internalFn();
+            internalprotectedFn();
+
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lib
+{
+    public class ClassInLib
+    {
+
+        public void call()
+        {
+            Pa pa = new Pa();
+            pa.publicFn();
+            //pa.privateFn();
+            //pa.protectedFn();
+            pa.internalFn();
+            pa.internalprotectedFn();
+
+        }
+    }
+}
+
+
+
+
+
+
