@@ -74,6 +74,69 @@ namespace WebAPI_Prj1.Models
 
 
 
+namespace WebAPI_Prj1.Models
+{
+        public class StudentContext
+        {
+            public static List<Student> student = new List<Student>      {
+            new Student { StudentId=101,Name="Abc",SurName="xyz"},
+            new Student { StudentId = 102, Name = "Abc2", SurName = "xyz2" },
+            new Student { StudentId = 103, Name = "Abc3", SurName = "xyz3" },
+            new Student { StudentId = 104, Name = "Abc4", SurName = "xyz4" }
+        };
+            public List<Student> GetAllStudent()
+            {
+                return student;
+            }
+            public Student GetStudent(int id)
+            {
+                return student.FirstOrDefault(x => x.StudentId == id);
+            }
+            public Student DeleteStudent(int id)
+            {
+                Student s = student.FirstOrDefault(x => x.StudentId == id);
+                student.Remove(s);
+                return s;
+            }
+            public String InsertStudent(Student std)
+            {
+                student.Add(std);
+                return std.ToString() + " Added Successfully!!";
+            }
+            public Student UpdateStudent(int id, Student s)
+            {
+                var std = student.FirstOrDefault(x => x.StudentId == id);
+                if (std != null)
+                {
+                    std.StudentId = s.StudentId;
+                    std.Name = s.Name;
+                    std.SurName = s.SurName;
+                }
+                return std;
+            }
+            public StudentContext()
+            {
+                student.Add(new Student { StudentId = 105, Name = "Abc5", SurName = "xyz5" });
+                student.Add(new Student { StudentId = 106, Name = "Abc6", SurName = "xyz6" });
+                student.Add(new Student { StudentId = 107, Name = "Abc7", SurName = "xyz7" });
+                student.Add(new Student { StudentId = 108, Name = "Abc8", SurName = "xyz8" });
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
