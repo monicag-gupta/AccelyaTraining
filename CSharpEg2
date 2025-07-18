@@ -99,4 +99,88 @@ namespace Lib
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lib;
+
+namespace PrjWithLib
+{
+    public class ChildInMain : Pa
+    {
+
+        public void call()
+        {
+            publicFn();
+            //privateFn();
+            protectedFn();
+            //internalFn();
+            internalprotectedFn();
+
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lib;
+
+namespace PrjWithLib
+{
+    public class ClassInMain
+    {
+
+        public void call()
+        {
+            Pa pa = new Pa();
+            pa.publicFn();
+            //pa.privateFn();
+            //pa.protectedFn();
+            //pa.internalFn();
+            //pa.internalprotectedFn();
+
+        }
+    }
+}
+
+
+
+
+
+
+
+using Lib;
+using PrjWithLib;
+using System;
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        new Pa().call();
+        new ChildInLib().call();
+        new ClassInLib().call();
+        new ChildInMain().call();
+        new ClassInMain().call();
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
