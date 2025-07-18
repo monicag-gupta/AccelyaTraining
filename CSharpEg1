@@ -230,3 +230,37 @@ namespace Prj1
 
 
 
+
+using Prj1;
+using System;
+
+namespace Prj1
+{
+    class Emp
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public override string? ToString()
+        {
+            return "ID : " + Id + " Name: " + Name;
+        }
+    }
+
+    public class Program
+    {
+
+        public static void Main(string[] args)
+        {
+            Emp emp = new Emp { Id = 101, Name = "John Doe" };
+            Console.WriteLine(emp);
+
+        }
+    }
+}
+
+
+
+
+
+
