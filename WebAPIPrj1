@@ -8,7 +8,7 @@ Program.cs:
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+////https://localhost:7002/swagger/index.html
 //Add here
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
