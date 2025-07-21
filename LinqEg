@@ -42,7 +42,7 @@ class Program
         {
             Console.WriteLine(f);
         }
-        Console.ReadLine();
+       
     }
 }
 
