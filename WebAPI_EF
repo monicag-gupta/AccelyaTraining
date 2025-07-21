@@ -292,6 +292,7 @@ SELECT * FROM Employees;
 
 
 
+
 namespace WebAPI_EF.Models;
 
 public class Employees
@@ -300,7 +301,7 @@ public class Employees
     public string name { get; set; }
     public string department { get; set; }
     public decimal salary { get; set; }
-    public DateTime joiningDate { get; set; }
+    public DateTime joiningdate { get; set; }
 }
 
 
