@@ -1,1 +1,17 @@
 
+Open Visual Studio 2022 (Preview) → Create ASP.NET Core Web API
+Choose:
+Framework: .NET 9.0
+Enable OpenAPI
+Use Controllers
+Install EF Core PostgreSQL Packages
+Open Package Manager Console and run:
+Install-Package Npgsql.EntityFrameworkCore.PostgreSQL
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Swashbuckle.AspNetCore
+Or use NuGet GUI to install:
+Npgsql.EntityFrameworkCore.PostgreSQL
+Microsoft.EntityFrameworkCore.Tools
+Swashbuckle.AspNetCore
+
+
