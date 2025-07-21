@@ -123,6 +123,8 @@ EF will create the Employees table in PostgreSQL using Code First.
 
 
 
+drop table if exists Employees;
+
 
 CREATE TABLE Employees (
     Id SERIAL PRIMARY KEY,
