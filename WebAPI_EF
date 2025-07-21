@@ -494,6 +494,9 @@ public class EmployeesController : ControllerBase
 
         var exists = await _context.employees.AnyAsync(e => e.id == id);
         if (!exists) return NotFound(new { message = "Employee not found" });
+        
+        DateTime utcDateTime = DateTime.SpecifyKind(emp.joiningdate, DateTimeKind.Utc);
+        emp.joiningdate = utcDateTime;
 
         _context.Entry(emp).State = EntityState.Modified;
         await _context.SaveChangesAsync();
@@ -513,6 +516,7 @@ public class EmployeesController : ControllerBase
         return NoContent();
     }
 }
+
 
 
 
