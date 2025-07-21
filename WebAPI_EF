@@ -449,6 +449,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI_EF.Data;
 using WebAPI_EF.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebAPI_EF.Controllers;
 
@@ -476,7 +477,8 @@ public class EmployeesController : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
+        DateTime utcDateTime = DateTime.SpecifyKind(emp.joiningdate, DateTimeKind.Utc);
+        emp.joiningdate = utcDateTime;
         _context.employees.Add(emp);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = emp.id }, emp);
