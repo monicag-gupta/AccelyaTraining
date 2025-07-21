@@ -175,13 +175,13 @@ public class EmployeeController : ControllerBase
     {
         _context.Employees.Add(emp);
         await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = emp.Id }, emp);
+        return CreatedAtAction(nameof(GetById), new { id = emp.id }, emp);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, Employee emp)
     {
-        if (id != emp.Id) return BadRequest();
+        if (id != emp.id) return BadRequest();
         _context.Entry(emp).State = EntityState.Modified;
         await _context.SaveChangesAsync();
         return NoContent();
