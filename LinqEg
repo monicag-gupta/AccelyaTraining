@@ -185,6 +185,30 @@ class Program
     }
 }
 
+
+
+
+
+
+
+using System;
+using System.Linq;
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] flowers = { "dahlia", "rose", "lotus", "lily", "hibiscus", "daffodil" };
+        var f = flowers.Where(flower => flower.StartsWith("d"));
+        foreach (string g in f)
+        {
+            Console.WriteLine(g);
+        }
+        
+    }
+}
+
+
+
 //Prints 125
 
 
