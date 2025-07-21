@@ -517,7 +517,10 @@ public class EmployeesController : ControllerBase
 
 
 
-Add Global Error Handling MiddlewareMiddlewares/ErrorHandlerMiddleware.cs
+Add Global Error Handling Middleware
+Folder: Middlewares
+
+Class: ErrorHandlerMiddleware.cs
 
 using System.Net;
 using System.Text.Json;
