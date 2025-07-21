@@ -124,6 +124,19 @@ EF will create the Employees table in PostgreSQL using Code First.
 
 
 
+CREATE TABLE Employees (
+    Id SERIAL PRIMARY KEY,
+    Name TEXT,
+    Department TEXT
+);
+
+
+
+
+
+
+
+
 
 
 
