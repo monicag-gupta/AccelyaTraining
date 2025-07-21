@@ -47,3 +47,68 @@ class Program
 }
 
 
+
+
+
+
+
+
+
+
+
+
+// Linq : inner join 
+using System;
+using System.Linq;
+using System.Collections.Generic;
+public class Employee
+{
+    public int emp_id { get; set; }
+    public string emp_name { get; set; }
+    public string emp_lang { get; set; }
+}
+public class Department
+{
+    public int emp_id { get; set; }
+    public string emp_dept { get; set; }
+    public int emp_salary { get; set; }
+}
+class Program
+{
+    static public void Main()
+    {
+        List<Employee> emps = new List<Employee>() {
+            new Employee() {emp_id = 100, emp_name = "Jay", emp_lang = "C#"},
+            new Employee() {emp_id = 101, emp_name = "Moni", emp_lang = "C"},
+            new Employee() {emp_id = 102, emp_name = "Ishu", emp_lang = "Java"},
+            new Employee() {emp_id = 103, emp_name = "Tannu", emp_lang = "Java"},
+            new Employee() {emp_id = 104, emp_name = "Susma",emp_lang = "C#"},
+            new Employee() {emp_id = 105, emp_name = "Moni", emp_lang = "Java"},
+        };
+        List<Department> depts = new List<Department>() {
+            new Department() {emp_id = 100, emp_dept = "Designing", emp_salary = 43000},
+            new Department() {emp_id = 101, emp_dept = "Developer", emp_salary = 41000},
+            new Department() {emp_id = 102, emp_dept = "HR", emp_salary = 50000},
+            new Department() {emp_id = 103, emp_dept = "Designing", emp_salary = 60000},
+        };
+
+        // Query to find the name and the salary of the employees using Join
+        var res = from e in emps
+                  join d in depts
+                      on e.emp_id equals d.emp_id
+                  select new
+                  {
+                      Emp_Name = e.emp_name,
+                      Emp_Salary = d.emp_salary
+                  };
+
+        Console.WriteLine("Employee and their Salary: ");
+        foreach (var val in res)
+        {
+            Console.WriteLine("Employee Name: {0} Salary: {1}",
+                                val.Emp_Name, val.Emp_Salary);
+        }
+    }
+}
+
+
