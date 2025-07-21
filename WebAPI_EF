@@ -218,19 +218,50 @@ http://localhost:5243/swagger/index.html
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 PRj2 with Linq:
 
 
 In Postgresql
 
-public class Employees
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Department { get; set; }
-    public decimal Salary { get; set; }
-    public DateTime JoiningDate { get; set; }
-}
+CREATE TABLE Employees (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Department VARCHAR(100) NOT NULL,
+    Salary DECIMAL(10, 2) NOT NULL,
+    JoiningDate TIMESTAMP NOT NULL
+);
+
 
 
 INSERT INTO "Employees" ("Name", "Department", "Salary", "JoiningDate") VALUES
@@ -259,6 +290,282 @@ INSERT INTO "Employees" ("Name", "Department", "Salary", "JoiningDate") VALUES
 
 
 SELECT * FROM Employees;
+
+
+
+
+public class Employees
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Department { get; set; }
+    public decimal Salary { get; set; }
+    public DateTime JoiningDate { get; set; }
+}
+
+
+
+
+
+using System.ComponentModel.DataAnnotations;
+
+namespace MyApp.Models;
+
+public class Employee
+{
+    public int Id { get; set; }
+
+    [Required]
+    [StringLength(100)]
+    public string Name { get; set; }
+
+    [Required]
+    [StringLength(50)]
+    public string Department { get; set; }
+
+    [Range(0, 1000000)]
+    public decimal Salary { get; set; }
+
+    [DataType(DataType.Date)]
+    public DateTime JoiningDate { get; set; }
+}
+
+
+
+
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyEFApp.Data;
+using MyEFApp.Models;
+
+namespace MyEFApp.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeeQueryController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public EmployeeQueryController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    // Filter: Employees in specific department
+    [HttpGet("filter-by-department/{dept}")]
+    public async Task<ActionResult<IEnumerable<Employee>>> FilterByDepartment(string dept)
+    {
+        var result = await _context.Employees
+            .Where(e => e.Department == dept)
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Sort: Employees sorted by salary descending
+    [HttpGet("sort-by-salary")]
+    public async Task<ActionResult<IEnumerable<Employee>>> SortBySalary()
+    {
+        var result = await _context.Employees
+            .OrderByDescending(e => e.Salary)
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Filter: Joined after specific date
+    [HttpGet("joined-after")]
+    public async Task<ActionResult<IEnumerable<Employee>>> JoinedAfter([FromQuery] DateTime date)
+    {
+        var result = await _context.Employees
+            .Where(e => e.JoiningDate > date)
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Group: Count employees in each department
+    [HttpGet("group-by-department")]
+    public async Task<ActionResult> GroupByDepartment()
+    {
+        var result = await _context.Employees
+            .GroupBy(e => e.Department)
+            .Select(g => new {
+                Department = g.Key,
+                EmployeeCount = g.Count(),
+                AvgSalary = g.Average(x => x.Salary)
+            })
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Search: Name contains substring (case-insensitive)
+    [HttpGet("search-by-name")]
+    public async Task<ActionResult<IEnumerable<Employee>>> SearchByName([FromQuery] string keyword)
+    {
+        var result = await _context.Employees
+            .Where(e => EF.Functions.ILike(e.Name, $"%{keyword}%"))
+            .ToListAsync();
+
+        return Ok(result);
+    }
+}
+
+
+
+
+
+
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyApp.Data;
+using MyApp.Models;
+
+namespace MyApp.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeesController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public EmployeesController(AppDbContext context) => _context = context;
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Employee>>> GetAll() =>
+        await _context.Employees.ToListAsync();
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Employee>> GetById(int id)
+    {
+        var emp = await _context.Employees.FindAsync(id);
+        return emp == null ? NotFound(new { message = "Employee not found" }) : Ok(emp);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Employee>> Create([FromBody] Employee emp)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        _context.Employees.Add(emp);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(GetById), new { id = emp.Id }, emp);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] Employee emp)
+    {
+        if (id != emp.Id) return BadRequest("Mismatched ID");
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var exists = await _context.Employees.AnyAsync(e => e.Id == id);
+        if (!exists) return NotFound(new { message = "Employee not found" });
+
+        _context.Entry(emp).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var emp = await _context.Employees.FindAsync(id);
+        if (emp == null) return NotFound(new { message = "Employee not found" });
+
+        _context.Employees.Remove(emp);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+}
+
+
+
+
+
+
+Add Global Error Handling MiddlewareMiddlewares/ErrorHandlerMiddleware.cs
+
+using System.Net;
+using System.Text.Json;
+
+namespace MyApp.Middlewares;
+
+public class ErrorHandlerMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public ErrorHandlerMiddleware(RequestDelegate next) => _next = next;
+
+    public async Task Invoke(HttpContext context)
+    {
+        try
+        {
+            await _next(context);
+        }
+        catch (Exception ex)
+        {
+            var response = context.Response;
+            response.ContentType = "application/json";
+            response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            var errorResponse = new
+            {
+                message = ex.Message,
+                stackTrace = ex.StackTrace
+            };
+
+            await response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+using Microsoft.EntityFrameworkCore;
+using MyApp.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// ************ Global error handling
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
+
+
+
+
+
 
 
 
