@@ -218,4 +218,53 @@ http://localhost:5243/swagger/index.html
 
 
 
+PRj2 with Linq:
+
+
+In Postgresql
+
+public class Employees
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Department { get; set; }
+    public decimal Salary { get; set; }
+    public DateTime JoiningDate { get; set; }
+}
+
+
+INSERT INTO "Employees" ("Name", "Department", "Salary", "JoiningDate") VALUES
+('John Doe', 'HR', 50000, '2023-01-15 09:00:00'),
+('Jane Smith', 'IT', 75000, '2022-12-01 10:30:00'),
+('Alice Lee', 'Finance', 62000, '2021-06-10 14:00:00'),
+('Bob Brown', 'IT', 70000, '2022-08-05 11:00:00'),
+('Carol Ray', 'HR', 52000, '2023-02-20 13:15:00');
+
+INSERT INTO "Employees" ("Name", "Department", "Salary", "JoiningDate") VALUES
+('Emily Carter', 'Finance', 68000, '2021-05-10 09:00:00'),
+('David Wilson', 'Marketing', 55000, '2022-03-12 10:00:00'),
+('Sophia Green', 'IT', 78000, '2023-04-18 11:00:00'),
+('Michael Young', 'HR', 53000, '2023-06-21 08:45:00'),
+('Olivia Brown', 'Finance', 60000, '2020-11-29 13:30:00'),
+('Daniel Martinez', 'IT', 72000, '2022-07-10 09:30:00'),
+('Grace Kim', 'Marketing', 58000, '2023-01-17 14:15:00'),
+('Anthony Clark', 'Finance', 61000, '2021-10-25 12:00:00'),
+('Isabella Adams', 'HR', 51000, '2022-09-30 10:45:00'),
+('Liam Thompson', 'IT', 76000, '2023-02-11 09:00:00');
+
+
+
+
+
+
+
+SELECT * FROM Employees;
+
+
+
+
+
+
+
+
 
