@@ -166,4 +166,27 @@ class X
 //Prints 125
 
 
+using System;
+class Program
+{
+    delegate int cube(int i);
+
+    int sq(int i)
+    {
+        return i * i;
+    }
+    static void Main(string[] args)
+    {
+        cube myDelegate = x => x * x * x;
+        //cube myDelegate = new cube(new Program().sq);
+        int j = myDelegate(5);
+        Console.Write(j);
+        
+    }
+}
+
+//Prints 125
+
+
+
 
