@@ -30,6 +30,7 @@ public class Employee
 
 
 
+
 using Microsoft.EntityFrameworkCore;
 using WebAPI_EF.Models;
 
@@ -40,7 +41,7 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options) { }
 
-    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Employee> employees { get; set; }
 }
 
 
@@ -167,13 +168,13 @@ public class EmployeeController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Employee>>> GetAll()
     {
-        return await _context.Employees.ToListAsync();
+        return await _context.employees.ToListAsync();
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Employee>> GetById(int id)
     {
-        var emp = await _context.Employees.FindAsync(id);
+        var emp = await _context.employees.FindAsync(id);
         if (emp == null) return NotFound();
         return emp;
     }
@@ -181,7 +182,7 @@ public class EmployeeController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Employee>> Create(Employee emp)
     {
-        _context.Employees.Add(emp);
+        _context.employees.Add(emp);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = emp.id }, emp);
     }
@@ -198,14 +199,13 @@ public class EmployeeController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var emp = await _context.Employees.FindAsync(id);
+        var emp = await _context.employees.FindAsync(id);
         if (emp == null) return NotFound();
-        _context.Employees.Remove(emp);
+        _context.employees.Remove(emp);
         await _context.SaveChangesAsync();
         return NoContent();
     }
 }
-
 
 
 
