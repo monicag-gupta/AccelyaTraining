@@ -114,5 +114,19 @@ app.Run();
 
 
 
+Run EF Migrations
+In Package Manager Console:
+Add-Migration InitialCreate
+Update-Database
+EF will create the Employees table in PostgreSQL using Code First.
+
+
+
+
+
+
+
+
+
 
 
