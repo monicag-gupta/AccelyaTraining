@@ -45,3 +45,32 @@ public class AppDbContext : DbContext
 
 
 
+
+
+appsettings.json : add: 
+
+  "ConnectionStrings": {
+    "PostgresConnection": "Host=localhost;Port=5432;Database=tempdb;Username=postgres;Password=your_password"
+
+
+
+
+{
+  "ConnectionStrings": {
+    "PostgresConnection": "Host=localhost;Port=5432;Database=training;Username=postgres;Password=root",
+
+    "Logging": {
+      "LogLevel": {
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning"
+      }
+    },
+    "AllowedHosts": "*"
+  }
+
+
+
+
+
+
+
