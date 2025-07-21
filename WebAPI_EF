@@ -323,6 +323,92 @@ public class AppDbContext : DbContext
 
 
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebAPI_EF.Data;
+using WebAPI_EF.Models;
+
+namespace WebAPI_EF.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeeQueryController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public EmployeeQueryController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    // Filter: Employees in specific department
+    [HttpGet("filter-by-department/{dept}")]
+    public async Task<ActionResult<IEnumerable<Employees>>> FilterByDepartment(string dept)
+    {
+        var result = await _context.employees
+            .Where(e => e.department == dept)
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Sort: Employees sorted by salary descending
+    [HttpGet("sort-by-salary")]
+    public async Task<ActionResult<IEnumerable<Employees>>> SortBySalary()
+    {
+        var result = await _context.employees
+            .OrderByDescending(e => e.salary)
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Filter: Joined after specific date
+    [HttpGet("joined-after")]
+    public async Task<ActionResult<IEnumerable<Employees>>> JoinedAfter([FromQuery] DateTime date)
+    {
+        var result = await _context.employees
+            .Where(e => e.joiningDate > date)
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Group: Count employees in each department
+    [HttpGet("group-by-department")]
+    public async Task<ActionResult> GroupByDepartment()
+    {
+        var result = await _context.employees
+            .GroupBy(e => e.department)
+            .Select(g => new {
+                Department = g.Key,
+                EmployeeCount = g.Count(),
+                AvgSalary = g.Average(x => x.salary)
+            })
+            .ToListAsync();
+
+        return Ok(result);
+    }
+
+    // Search: Name contains substring (case-insensitive)
+    [HttpGet("search-by-name")]
+    public async Task<ActionResult<IEnumerable<Employees>>> SearchByName([FromQuery] string keyword)
+    {
+        var result = await _context.employees
+            .Where(e => EF.Functions.ILike(e.name, $"%{keyword}%"))
+            .ToListAsync();
+
+        return Ok(result);
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
