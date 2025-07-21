@@ -18,3 +18,32 @@ class Program
     }
 }
 //The same query can be run multiple times since query itself does not produce any results. 
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Linq;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] numbers = new int[10];
+        for (int i=0;i<10; i++) { numbers[i] = i; }
+        var fQuery =
+        from num in numbers where (num%2==1) select num*num*num;
+        foreach (int f in fQuery)
+        {
+            Console.WriteLine(f);
+        }
+        Console.ReadLine();
+    }
+}
+
+
