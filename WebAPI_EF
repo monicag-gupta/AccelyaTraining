@@ -368,8 +368,9 @@ public class EmployeeQueryController : ControllerBase
     [HttpGet("joined-after")]
     public async Task<ActionResult<IEnumerable<Employees>>> JoinedAfter([FromQuery] DateTime date)
     {
+        DateTime utcDateTime = DateTime.SpecifyKind(date, DateTimeKind.Utc);
         var result = await _context.employees
-            .Where(e => e.joiningDate > date)
+            .Where(e => e.joiningdate > utcDateTime)
             .ToListAsync();
 
         return Ok(result);
@@ -402,9 +403,6 @@ public class EmployeeQueryController : ControllerBase
         return Ok(result);
     }
 }
-
-
-
 
 
 
