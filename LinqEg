@@ -150,3 +150,20 @@ public class Program
 
 
 
+using System;
+class X
+{
+    delegate int cube(int i);
+    static void Main(string[] args)
+    {
+        cube myDelegate = x => x*x*x;
+        int j = myDelegate(5);
+        Console.Write(j);
+	  Console.ReadLine();
+    }
+}
+
+//Prints 125
+
+
+
