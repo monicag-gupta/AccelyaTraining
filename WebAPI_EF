@@ -292,14 +292,36 @@ SELECT * FROM Employees;
 
 
 
+namespace WebAPI_EF.Models;
+
 public class Employees
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Department { get; set; }
-    public decimal Salary { get; set; }
-    public DateTime JoiningDate { get; set; }
+    public int id { get; set; }
+    public string name { get; set; }
+    public string department { get; set; }
+    public decimal salary { get; set; }
+    public DateTime joiningDate { get; set; }
 }
+
+
+
+
+using Microsoft.EntityFrameworkCore;
+using WebAPI_EF.Models;
+
+namespace WebAPI_EF.Data;
+
+public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options) { }
+
+    public DbSet<Employees> employees { get; set; }
+}
+
+
+
+
 
 
 
@@ -334,10 +356,10 @@ public class Employee
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MyEFApp.Data;
-using MyEFApp.Models;
+using WebAPI_EF.Data;
+using WebAPI_EF.Models;
 
-namespace MyEFApp.Controllers;
+namespace WebAPI_EF.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
