@@ -604,6 +604,88 @@ app.Run();
 
 
 
+Validation:
+Posted request:
+
+{
+  "Department": "IT",
+  "Salary": 60000,
+  "JoiningDate": "2023-01-01"
+}
+
+
+
+
+
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "name": [
+      "The name field is required."
+    ]
+  },
+  "traceId": "00-52aa6a99758bc42f90380bcfc172fb3d-3f096e45621d8a30-00"
+}
+
+
+
+
+
+
+
+{
+  "Name": "This name is way too long because it exceeds the 100 characters limit set in the model validation check. This should fail",
+  "Department": "IT",
+  "Salary": 50000,
+  "JoiningDate": "2023-03-01"
+}
+
+
+
+
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "name": [
+      "The field name must be a string with a maximum length of 100."
+    ]
+  },
+  "traceId": "00-42caceac97b37c843110c1dbffb50322-b64e43f4ad8af324-00"
+}
+
+
+
+
+
+
+{
+  "Name": "Jane Doe",
+  "Department": "Finance",
+  "Salary": -2000,
+  "JoiningDate": "2022-06-01"
+}
+
+
+
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "salary": [
+      "The field salary must be between 0 and 1000000."
+    ]
+  },
+  "traceId": "00-c02e10eabb85a5d2825065822e5798cc-47d7aba655a1eeff-00"
+}
+
+
+
+
 
 
 
