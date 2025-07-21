@@ -1,15 +1,20 @@
 using System;
 using System.Linq;
-class Program{
- static void Main(string[] args) {
-string[] flowers = { "dahlia", "rose", "lotus", "lily", "hibiscus", "daffodil" };
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] flowers = { "dahlia", "rose", "lotus", "lily", "hibiscus", "daffodil" };
 
-var fQuery =
-from flower in flowers
-where (flower.StartsWith("d"))
-select flower;
-foreach (string f in fQuery) {
-                Console.WriteLine(f);
-}  
-  }}
+        var fQuery =
+             from flower in flowers
+                     where (flower.StartsWith("d"))
+                         select flower;
+        foreach (string f in fQuery)
+        {
+            Console.WriteLine(f);
+        }
+        
+    }
+}
 //The same query can be run multiple times since query itself does not produce any results. 
