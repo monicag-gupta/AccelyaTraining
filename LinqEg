@@ -11,5 +11,5 @@ select flower;
 foreach (string f in fQuery) {
                 Console.WriteLine(f);
 }  
-Console.ReadLine();   }}
+  }}
 //The same query can be run multiple times since query itself does not produce any results. 
