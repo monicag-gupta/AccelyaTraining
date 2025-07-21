@@ -77,12 +77,16 @@ appsettings.json : add:
 Program.cs
 
 using Microsoft.EntityFrameworkCore;
-using MyEFApp.Data;
+using WebAPI_EF.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
+// Add services to the container.
+
 builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+//builder.Services.AddOpenApi();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 builder.Services.AddEndpointsApiExplorer();
@@ -90,16 +94,20 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Middleware
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    //app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
+
 
 
 
