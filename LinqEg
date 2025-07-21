@@ -209,6 +209,40 @@ class Program
 
 
 
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+public class Employee
+{
+    public int emp_id { get; set; }
+    public string emp_name { get; set; }
+    public int emp_salary { get; set; }
+}
+public class Program
+{
+    static public void Main()
+    {
+        List<Employee> emp = new List<Employee>() {
+            new Employee() {emp_id = 100, emp_name = "Ishu", emp_salary = 20000},
+            new Employee() {emp_id = 101, emp_name = "Moni", emp_salary = 30000},
+            new Employee() {emp_id = 123, emp_name = "Jay", emp_salary = 40000},
+            new Employee() {emp_id = 112, emp_name = "Jayanta", emp_salary = 40000},
+            new Employee() {emp_id = 113, emp_name = "Monica", emp_salary = 40000},
+        };
+        var res = emp.OrderBy(e => e.emp_name).Reverse();
+        foreach (var val in res)
+            Console.WriteLine("Employee Name: {0}", val.emp_name);
+
+        var res1 = emp.OrderBy(e => e.emp_name).Reverse().OrderBy(e => e.emp_id);
+        foreach (var val in res1)
+            Console.WriteLine("Employee Name: {0}", val.emp_name);
+    }
+}
+
+
+
+
 //Prints 125
 
 
