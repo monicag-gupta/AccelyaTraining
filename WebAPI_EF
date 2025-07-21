@@ -132,6 +132,12 @@ CREATE TABLE Employees (
     Department TEXT
 );
 
+Insert into Employees(name, department) values ('John','IT')
+, ('Jane','IT')
+, ('Harry','HR')
+, ('Potter','IT')
+, ('Bob','Finance');
+
 
 
 
