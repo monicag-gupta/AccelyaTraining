@@ -8,7 +8,7 @@ Install EF Core PostgreSQL Packages
 Open Package Manager Console and run:
 Install-Package Npgsql.EntityFrameworkCore.PostgreSQL
 Install-Package Microsoft.EntityFrameworkCore.Tools
-Swashbuckle.AspNetCore
+Install-Package Swashbuckle.AspNetCore
 Or use NuGet GUI to install:
 Npgsql.EntityFrameworkCore.PostgreSQL
 Microsoft.EntityFrameworkCore.Tools
