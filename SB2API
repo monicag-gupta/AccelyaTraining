@@ -23,6 +23,339 @@ select * from Emptbl;
 
 
 
+Create Project
+File → New → Project → ASP.NET Core Web API
+Choose .NET 9 framework
+Enable Swagger ✅
+
+Do not use HTTPS (if your company has certificate for SSL, then install the certificate for the current system and have the project with https)
+
+
+
+
+NuGet Packages:
+
+Npgsql.EntityFrameworkCore.PostgreSQL
+Microsoft.EntityFrameworkCore.Tools
+Swashbuckle.AspNetCore
+
+
+
+Create folder : Models
+
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebApplication1.Models
+{
+    [Table("emptbl")]
+    public class EmpTbl
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string department { get; set; }
+    }
+
+}
+
+
+
+
+Create folder Data:
+
+
+using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models;
+
+namespace WebApplication1.Data
+{
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public DbSet<EmpTbl> EmpTbls { get; set; }
+    }
+
+}
+
+
+
+
+
+Edit Program.cs:
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+if (app.Environment.IsDevelopment())
+{
+    //app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
+}
+
+
+
+
+
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebApplication1.Data;
+using WebApplication1.Models;
+
+namespace WebApplication1.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EmpTblController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+        public EmpTblController(AppDbContext context) => _context = context;
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EmpTbl>>> GetAll() =>
+            await _context.EmpTbls.ToListAsync();
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EmpTbl>> GetById(int id)
+        {
+            var emp = await _context.EmpTbls.FindAsync(id);
+            return emp == null ? NotFound() : emp;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<EmpTbl>> Create(EmpTbl emp)
+        {
+            _context.EmpTbls.Add(emp);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetById), new { id = emp.id }, emp);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, EmpTbl emp)
+        {
+            if (id != emp.id) return BadRequest();
+            _context.Entry(emp).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var emp = await _context.EmpTbls.FindAsync(id);
+            if (emp == null) return NotFound();
+            _context.EmpTbls.Remove(emp);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+    }
+}
+
+
+
+
+
+
+Appsettings.json
+
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=tempdb;Username=postgres;Password=root"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+
+
+
+
+
+Run the Project
+
+Open Swagger to check the working:
+http://localhost:5119/swagger/index.html
+
+Keep the project running
+
+
+
+
+
+
+
+
+
+Java Project:
+
+
+
+Start eclipse
+Spring starter Project:
+Create Spring Boot Starter Project (in Eclipse)
+SBCallingAPIPrj
+com.callservice
+Dependencies:
+Spring Web
+
+
+
+
+package com.callservice.model;
+
+public class EmpTbl {
+    private int id;
+    private String name;
+    private String department;
+public int getId() {
+return id;
+}
+public void setId(int id) {
+this.id = id;
+}
+public String getName() {
+return name;
+}
+public void setName(String name) {
+this.name = name;
+}
+public String getDepartment() {
+return department;
+}
+public void setDepartment(String department) {
+this.department = department;
+}
+    
+    
+
+    // Getters and Setters
+}
+
+
+
+
+
+
+
+
+
+
+package com.callservice.service;
+
+import java.util.*;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import com.callservice.model.*;
+
+@Service
+public class DotNetApiService {
+
+    private final String BASE_URL = "http://localhost:5177/api/EmpTbl"; // adjust port
+
+    private final RestTemplate restTemplate = new RestTemplate();
+
+    public List<EmpTbl> getAllEmployees() {
+        EmpTbl[] list = restTemplate.getForObject(BASE_URL, EmpTbl[].class);
+        return Arrays.asList(list);
+    }
+
+    public EmpTbl getEmployeeById(int id) {
+        return restTemplate.getForObject(BASE_URL + "/" + id, EmpTbl.class);
+    }
+
+    public EmpTbl addEmployee(EmpTbl emp) {
+        return restTemplate.postForObject(BASE_URL, emp, EmpTbl.class);
+    }
+
+    public void updateEmployee(int id, EmpTbl emp) {
+        restTemplate.put(BASE_URL + "/" + id, emp);
+    }
+
+    public void deleteEmployee(int id) {
+        restTemplate.delete(BASE_URL + "/" + id);
+    }
+}
+
+
+
+
+
+
+
+
+package com.callservice.controller;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.web.bind.annotation.*;
+import com.callservice.model.*;
+import com.callservice.service.*;
+import java.util.*;
+
+@RestController
+@RequestMapping("/spring/employees")
+public class SpringController {
+
+    @Autowired
+    private DotNetApiService service;
+
+    @GetMapping
+    public List<EmpTbl> getAll() {
+        return service.getAllEmployees();
+    }
+
+    @PostMapping
+    public EmpTbl create(@RequestBody EmpTbl emp) {
+        return service.addEmployee(emp);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable int id, @RequestBody EmpTbl emp) {
+        service.updateEmployee(id, emp);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
+        service.deleteEmployee(id);
+    }
+}
+
+
+
+
+
+
+Run as maven clean, install, spring boot run
+
+In postman:
+
+http://localhost:5177/api/EmpTbl
+
+http://localhost:8080/spring/employees
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
