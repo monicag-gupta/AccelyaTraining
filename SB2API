@@ -47,7 +47,7 @@ Create folder : Models
 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApplication1.Models
+namespace  WebAPI_EF_Prj.Models
 {
     [Table("emptbl")]
     public class EmpTbl
@@ -66,9 +66,9 @@ Create folder Data:
 
 
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
+using  WebAPI_EF_Prj.Models;
 
-namespace WebApplication1.Data
+namespace  WebAPI_EF_Prj.Data
 {
     public class AppDbContext : DbContext
     {
@@ -107,8 +107,8 @@ if (app.Environment.IsDevelopment())
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
-using WebApplication1.Models;
+using  WebAPI_EF_Prj.Data;
+using  WebAPI_EF_Prj.Models;
 
 namespace WebApplication1.Controllers
 {
