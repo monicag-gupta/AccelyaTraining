@@ -363,3 +363,368 @@ http://localhost:8080/spring/employees
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Java SB service and C# Web API:
+
+Spring Starter Project
+EmpService
+com.sbprj
+
+Artifact: EmpService
+Dependencies:
+Spring Web
+Spring Data JPA
+PostgreSQL Driver
+
+
+
+
+application.properties
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/tempdb
+spring.datasource.username=postgre
+spring.datasource.password=root
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+server.port=8080
+
+
+
+
+
+
+
+
+package com.sbprj.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "emptbl")
+public class EmpTbl {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String name;
+    private String department;
+
+    // Constructors
+    public EmpTbl() {}
+    public EmpTbl(String name, String department) {
+        this.name = name;
+        this.department = department;
+    }
+public int getId() {
+return id;
+}
+public void setId(int id) {
+this.id = id;
+}
+public String getName() {
+return name;
+}
+public void setName(String name) {
+this.name = name;
+}
+public String getDepartment() {
+return department;
+}
+public void setDepartment(String department) {
+this.department = department;
+}
+
+    // Getters and Setters
+    // ...
+}
+
+
+
+
+
+
+
+package com.sbprj.repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.sbprj.model.EmpTbl;
+
+public interface EmpRepository extends JpaRepository<EmpTbl, Integer> {
+}
+
+
+
+
+
+
+
+package com.sbprj.controller;
+
+
+import com.sbprj.model.EmpTbl;
+import com.sbprj.repository.EmpRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/employees")
+public class EmpController {
+
+    @Autowired
+    private EmpRepository empRepository;
+
+    @GetMapping
+    public List<EmpTbl> getAll() {
+        return empRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public EmpTbl getById(@PathVariable int id) {
+        return empRepository.findById(id).orElse(null);
+    }
+
+    @PostMapping
+    public EmpTbl create(@RequestBody EmpTbl emp) {
+        return empRepository.save(emp);
+    }
+
+    @PutMapping("/{id}")
+    public EmpTbl update(@PathVariable int id, @RequestBody EmpTbl updatedEmp) {
+        Optional<EmpTbl> optionalEmp = empRepository.findById(id);
+        if (optionalEmp.isPresent()) {
+            EmpTbl emp = optionalEmp.get();
+            emp.setName(updatedEmp.getName());
+            emp.setDepartment(updatedEmp.getDepartment());
+            return empRepository.save(emp);
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
+        empRepository.deleteById(id);
+    }
+}
+
+
+
+
+
+
+
+
+Run as Maven clean, install, Spring boot run  : spring-boot:run
+
+Check in Postman:
+GET/POST/PUT/DELETE on http://localhost:8080/api/employees
+
+
+
+
+
+
+
+
+
+
+Create .Net Web API Project
+Project Name: EmpClient
+Template: ASP.NET Core Web API
+
+No HTTPs
+
+
+Install:
+Swashbuckle.AspNetCore
+
+
+
+
+namespace WebApplication3.Models
+{
+    public class EmpTbl
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string department { get; set; }
+    }
+}
+
+
+
+
+
+using System.Net.Http.Json;
+namespace WebApplication3.Models
+{
+    public class EmpService
+    {
+        private readonly HttpClient _httpClient;
+        private readonly string _baseUrl = "http://localhost:8080/api/employees";
+
+        public EmpService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<List<EmpTbl>> GetAllAsync()
+        {
+            return await _httpClient.GetFromJsonAsync<List<EmpTbl>>(_baseUrl);
+        }
+
+        public async Task<EmpTbl> GetByIdAsync(int id)
+        {
+            return await _httpClient.GetFromJsonAsync<EmpTbl>($"{_baseUrl}/{id}");
+        }
+
+        public async Task<HttpResponseMessage> CreateAsync(EmpTbl emp)
+        {
+            return await _httpClient.PostAsJsonAsync(_baseUrl, emp);
+        }
+
+        public async Task<HttpResponseMessage> UpdateAsync(int id, EmpTbl emp)
+        {
+            return await _httpClient.PutAsJsonAsync($"{_baseUrl}/{id}", emp);
+        }
+
+        public async Task<HttpResponseMessage> DeleteAsync(int id)
+        {
+            return await _httpClient.DeleteAsync($"{_baseUrl}/{id}");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using WebApplication3.Models;
+
+namespace WebApplication3.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class EmpProxyController : ControllerBase
+    {
+        private readonly EmpService _empService;
+
+        public EmpProxyController(EmpService empService)
+        {
+            _empService = empService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll() => Ok(await _empService.GetAllAsync());
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id) => Ok(await _empService.GetByIdAsync(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Post(EmpTbl emp) => Ok(await _empService.CreateAsync(emp));
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, EmpTbl emp) => Ok(await _empService.UpdateAsync(id, emp));
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id) => Ok(await _empService.DeleteAsync(id));
+    }
+
+}
+
+
+
+
+
+
+Add in Program.cs:
+
+builder.Services.AddHttpClient<EmpService>();
+builder.Services.AddScoped<EmpService>();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+if (app.Environment.IsDevelopment())
+{
+    //app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
+}
+
+
+
+
+
+
+
+
+
+
+Run:
+http://localhost:5027/swagger/index.html
+
+http://localhost:5027/api/EmpProxy
+
+And see the output
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
