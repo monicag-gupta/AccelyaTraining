@@ -1,0 +1,32 @@
+CREATE TABLE EmpTbl (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(100),
+    Department VARCHAR(100)
+);
+
+
+INSERT INTO EmpTbl (Name, Department) VALUES ('Alice', 'IT');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Bob', 'HR');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Charlie', 'Finance');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Diana', 'IT');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Edward', 'Sales');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Fiona', 'HR');
+INSERT INTO EmpTbl (Name, Department) VALUES ('George', 'Finance');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Hannah', 'Sales');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Ian', 'IT');
+INSERT INTO EmpTbl (Name, Department) VALUES ('Jenny', 'Marketing');
+
+
+
+
+select * from Emptbl;
+
+
+
+
+
+
+
+
+
+
