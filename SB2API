@@ -110,7 +110,7 @@ using Microsoft.EntityFrameworkCore;
 using  WebAPI_EF_Prj.Data;
 using  WebAPI_EF_Prj.Models;
 
-namespace WebApplication1.Controllers
+namespace WebAPI_EF_Prj.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
