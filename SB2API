@@ -422,7 +422,7 @@ PostgreSQL Driver
 
 application.properties
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/tempdb
+spring.datasource.url=jdbc:postgresql://localhost:5432/training
 spring.datasource.username=postgre
 spring.datasource.password=root
 
