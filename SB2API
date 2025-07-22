@@ -24,6 +24,8 @@ select * from Emptbl;
 
 
 Create Project
+
+WebAPI_EF_Prj
 File → New → Project → ASP.NET Core Web API
 Choose .NET 9 framework
 Enable Swagger ✅
