@@ -1,1 +1,14 @@
 npm install -g create-react-app
+
+
+If error pops us for npm install,
+Then run:
+
+npm cache clean --force
+
+Then try the npm install.
+
+
+
+
+
