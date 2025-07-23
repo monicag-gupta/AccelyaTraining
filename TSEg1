@@ -130,3 +130,27 @@ console.log("The array after split, gives the words as: " + arr);
 console.log("Slicing 4th charater to 7th character: " + str1.slice(4,7)); //Slicing 4th charater to 7th character: scr
 console.log("Trimming the spaces: " + str2.trim()); //Trimming the spaces: is great
 
+
+
+
+
+
+
+
+
+let myArray = [10, 20, 30, 40, 50,];  
+console.log("Output of for..in loop ");  
+for (let index in myArray) {  
+   console.log(index);  
+}  
+console.log("Output of for..of loop ");  
+for (let val of myArray) {  
+   console.log(val);  
+}  
+
+
+
+
+
+
+
