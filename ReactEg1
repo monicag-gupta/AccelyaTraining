@@ -122,6 +122,34 @@ root.render(<App/>);
 
 
 
+import logo from './logo.svg';
+import './App.css';
+
+function App2(){
+  return (
+    <>
+    <h1>This is the child of APP</h1>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <h1>Hello World</h1> 
+      <App2/>
+      <h2>Hello again!</h2>
+    </>
+  );
+}
+
+export default App;
+
+
+
+
+
+
 
 
 
