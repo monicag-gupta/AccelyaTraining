@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Selectors Example</title>
+  <style>
+    /* Tag selector: applies to all <h1> elements */
+    h1 {
+      color: navy;
+      text-align: center;
+      font-family: Verdana, sans-serif;
+    }
+
+    /* Class selector: applies to any element with class="highlight" */
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+      padding: 5px;
+    }
+
+    /* ID selector: applies to the element with id="main-paragraph" */
+    #main-paragraph {
+      color: #333;
+      font-size: 18px;
+      line-height: 1.6;
+      border-left: 4px solid #2196F3;
+      padding-left: 10px;
+    }
+
+    /* Class for styled button */
+    .btn {
+      background-color: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Hover effect for button */
+    .btn:hover {
+      background-color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tag Selector Example -->
+  <h1>Welcome to CSS Selector Demo</h1>
+
+  <!-- ID Selector Example -->
+  <p id="main-paragraph">
+    This paragraph is styled using an <strong>ID selector</strong>. It has a left border and custom font settings.
+  </p>
+
+  <!-- Class Selector Example -->
+  <p class="highlight">
+    This is a highlighted paragraph using a <strong>class selector</strong>.
+  </p>
+
+  <!-- Using multiple classes -->
+  <button class="btn highlight">
+    Click Me
+  </button>
+
+</body>
+</html>
+
