@@ -198,13 +198,7 @@ addNumbers(10,10,10,10,10)
 
 
 
-class Greeting { 
-   greet():void { 
-      console.log("Hello World!!!") 
-   } 
-} 
-var obj = new Greeting(); 
-obj.greet();
+
 
 
 
@@ -260,6 +254,18 @@ disp(1,"xyz");
 
 // disp("abc","xyz");
 
+
+
+
+
+
+class Greeting { 
+   greet():void { 
+      console.log("Hello World!!!") 
+   } 
+} 
+var obj = new Greeting(); 
+obj.greet();
 
 
 
