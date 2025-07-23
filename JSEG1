@@ -87,6 +87,88 @@
 
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spread Operator with Button</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      margin: 10px 0;
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+    }
+    h2 {
+      color: #0066cc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>1️⃣ Array Update Using Spread Operator</h2>
+  <button onclick="updateArray()">Update Array</button>
+  <pre id="arrayOutput">Click the button to see updated array.</pre>
+
+  <h2>2️⃣ Object Update Using Spread Operator</h2>
+  <button onclick="updateObject()">Update Object</button>
+  <pre id="objectOutput">Click the button to see updated object.</pre>
+
+  <script>
+    function updateArray() {
+      const originalFruits = ["apple", "banana", "orange"];
+      const updatedFruits = [...originalFruits, "mango", "grapes"];
+      
+      document.getElementById("arrayOutput").textContent =
+        "Original Array:\n" + JSON.stringify(originalFruits, null, 2) +
+        "\n\nUpdated Array:\n" + JSON.stringify(updatedFruits, null, 2);
+    }
+
+    function updateObject() {
+      const car = {
+        brand: "Toyota",
+        model: "Corolla",
+        color: "White",
+        year: 2022
+      };
+
+      const updatedCar = {
+        ...car,
+        color: "Blue",    // update only color
+        year: 2025        // update only year
+      };
+
+      document.getElementById("objectOutput").textContent =
+        "Original Object:\n" + JSON.stringify(car, null, 2) +
+        "\n\nUpdated Object:\n" + JSON.stringify(updatedCar, null, 2);
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
 
 
 
