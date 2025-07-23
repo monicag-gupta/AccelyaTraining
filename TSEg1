@@ -40,3 +40,31 @@ function printa() {
     //console.log(anotherLargerNum); // ReferenceError: anotherLargerNum is not defined
 }	printa();
 
+
+
+
+
+
+
+
+let arr:string[] = new Array("TypeScript","JavaScript","Java","C++","C#");
+console.log("arr: " + arr);
+let arr2:string[] = new Array("MVC", "HTML5", "ECMAScript");
+let arr3=arr.concat(arr2);
+console.log("arr3 : " + arr3);
+let arr4=arr.splice(2,5);
+console.log("arr4 : " + arr4);
+console.log("arr now is: " + arr);
+arr = new Array("HTML5", "TypeScript","JavaScript","Java","C++","C#");
+arr.push("CSS");
+console.log("arr after push of 'CSS' at end : " + arr);
+console.log("type of arr: " + (typeof arr));
+console.log("Is arr instance of array? " + (arr instanceof Array));
+console.log("Length of arr: " + arr.length);
+console.log("Sorted arr: " + arr.sort());
+console.log("Joining arr by space: " + arr.join(" "));
+console.log("Reversed arr: " + arr.reverse());
+console.log("Pop last element in arr: " + arr.pop());
+console.log("shift first element in arr: " + arr.shift());
+arr.unshift("Angular","ASP");
+console.log("arr now is: " + arr);
