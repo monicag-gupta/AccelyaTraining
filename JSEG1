@@ -172,4 +172,97 @@
 
 
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Array Functions</title>
+  <style>
+    button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 14px;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>JavaScript Array Methods Example</h2>
+   <h3>const numbers = [1, 2, 3, 4, 5] </h3>
+
+  <button onclick="useMap()">map()</button>
+  <button onclick="useFilter()">filter()</button>
+  <button onclick="useReduce()">reduce()</button>
+  <button onclick="useForEach()">forEach()</button>
+  <button onclick="useFind()">find()</button>
+  <button onclick="useSome()">some()</button>
+  <button onclick="useEvery()">every()</button>
+  <button onclick="useFlatMap()">flatMap()</button>
+
+  <div id="output">Click a button to see result here...</div>
+
+  <script>
+    const numbers = [1, 2, 3, 4, 5];
+
+    function print(msg) {
+      document.getElementById("output").textContent = msg;
+    }
+
+    function useMap() {
+      const result = numbers.map(n => n * 2);
+      print("numbers.map(n => n * 2): " + JSON.stringify(result));
+    }
+
+    function useFilter() {
+      const result = numbers.filter(n => n % 2 === 0);
+      print("numbers.filter(n => n % 2 === 0): " + JSON.stringify(result));
+    }
+
+    function useReduce() {
+      const result = numbers.reduce((sum, n) => sum + n, 0);
+      print("numbers.reduce((sum, n) => sum + n, 0): " + result);
+    }
+
+    function useForEach() {
+      let output = "numbers.forEach(n => output += n + ' '): ";
+      numbers.forEach(n => output += n + " ");
+      print(output.trim());
+    }
+
+    function useFind() {
+      const result = numbers.find(n => n > 3);
+      print("numbers.find(n => n > 3): " + result);
+    }
+
+    function useSome() {
+      const result = numbers.some(n => n > 4);
+      print("numbers.some(n => n > 4): " + result);
+    }
+
+    function useEvery() {
+      const result = numbers.every(n => n > 0);
+      print("numbers.every(n => n > 0): " + result);
+    }
+
+    function useFlatMap() {
+      const result = numbers.flatMap(n => [n, n * 10]);
+      print("numbers.flatMap(n => [n, n * 10]): " + JSON.stringify(result));
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
 
