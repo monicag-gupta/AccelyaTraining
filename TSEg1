@@ -1,1 +1,5 @@
 npm install -g typescript
+
+
+Open PowerShell as admin:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
