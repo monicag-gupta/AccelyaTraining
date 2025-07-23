@@ -37,3 +37,57 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Async/Await with Only Resolve</title>
+</head>
+<body>
+
+<h2>Click the button to load message</h2>
+<button onclick="loadData()">Load Data</button>
+
+<p id="output"></p>
+
+<script>
+  // Simulated async operation that always resolves
+  function fetchData() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("✅ Data loaded successfully! (No reject used)");
+      }, 2000);
+    });
+  }
+
+  // Async function using await (no error handling needed)
+  async function loadData() {
+    document.getElementById("output").innerHTML = "⏳ Loading...";
+    const result = await fetchData();
+    document.getElementById("output").innerHTML = result;
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
