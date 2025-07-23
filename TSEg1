@@ -5,3 +5,38 @@ Open PowerShell as admin:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 Press A to have all apps remotely signed
+
+
+
+
+console.log(num1) // undefined 	//Due to hoisting, we can access the num variable before the line of declaration through var; var has default value of undefined
+var num1 = 50; //global var
+console.log(num1) // 50
+var num1 = 100; //possible var can be used for redefining
+num1=200; //possible var can be used for reassigning
+
+//console.log(num3); // ReferenceError: Cannot access 'num3' before initialization	
+let num3 = 50;  //global let
+//let num3 = 100; // SyntaxError: Identifier 'num3' has already been declared
+num3 = 200; //possible, let can be used for reassigning
+//console.log(num4); // ReferenceError: Cannot access 'num4' before initialization	
+const num4 = 50;  //global const
+//const num4 = 100; // SyntaxError: Identifier 'num4' has already been declared
+//num4 = 200; // TypeError: Assignment to constant variable
+
+function printa() {
+    console.log(num2 * num2); //NaN
+    var num2 = 50; //local var
+    console.log(num2 * num2); //2500
+    let square = num4 * num4;
+    if (num4 < 60) {
+        var largerNumber = 80; //local scope var
+        const anotherLargerNumber = 100; //block scope const
+        let anotherLargerNum = 100; //block scope let
+        console.log(square) //2500
+    } 		
+    console.log(largerNumber); //80
+    //console.log(anotherLargerNumber);// ReferenceError: anotherLargerNumber is not defined
+    //console.log(anotherLargerNum); // ReferenceError: anotherLargerNum is not defined
+}	printa();
+
