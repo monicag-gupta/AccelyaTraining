@@ -83,3 +83,19 @@ console.log("The String value of a value is: "+value);
 // The Numeric value of a value is: 120
 // The String value of a value is: Welcome to Typescript
 
+
+
+
+
+
+
+//In function, we can pass a union type as a parameter.
+function display(value: (number | string))  
+{  
+    if(typeof(value) === "number")  
+        console.log('The given value is of type number.');  
+    else if(typeof(value) === "string")  
+        console.log('The given value is of type string.');  
+}  
+display(123);  //The given value is of type number.
+display("ABC");  //The given value is of type string.
