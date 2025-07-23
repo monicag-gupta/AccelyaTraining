@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promise Resolve and Reject</title>
+</head>
+<body>
+
+<h2>Click to test the Promise</h2>
+<button onclick="testPromise(true)">Resolve</button>
+<button onclick="testPromise(false)">Reject</button>
+
+<p id="output"></p>
+
+<script>
+  function testPromise(shouldResolve) {
+    document.getElementById("output").innerHTML = "⏳ Processing...";
+
+    const myPromise = new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        if (shouldResolve) {
+          resolve("✅ Promise was resolved successfully!");
+        } else {
+          reject("❌ Promise was rejected due to an error.");
+        }
+      }, 2000); // simulate async operation
+    });
+
+    myPromise
+      .then(function(result) {
+        document.getElementById("output").innerHTML = result;
+      })
+      .catch(function(error) {
+        document.getElementById("output").innerHTML = error;
+      });
+  }
+</script>
+
+</body>
+</html>
