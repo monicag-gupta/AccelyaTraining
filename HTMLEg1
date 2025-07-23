@@ -25,3 +25,54 @@
 </body>
 </html>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Progress and Meter Example</title>
+</head>
+<body>
+
+  <h1>HTML5: &lt;progress&gt; and &lt;meter&gt; Example</h1>
+
+  <!-- Progress Tag Example -->
+  <h2>Task Progress</h2>
+  <p>Downloading File: 70% Complete</p>
+  <progress value="70" max="100"></progress>
+
+  <!-- Dynamic progress example -->
+  <p>Loading...</p>
+  <progress></progress> <!-- Indeterminate state -->
+
+  <hr>
+
+  <!-- Meter Tag Example -->
+  <h2>System Health (CPU Usage)</h2>
+  <p>CPU Usage: 60%</p>
+  <meter value="60" min="0" max="100" low="40" high="80" optimum="20">
+    60%
+  </meter>
+
+  <h2>Student Marks</h2>
+  <p>Score: 8 out of 10</p>
+  <meter value="8" min="0" max="10">8 out of 10</meter>
+
+</body>
+</html>
+
+
+
