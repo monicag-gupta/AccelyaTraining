@@ -85,6 +85,44 @@ root.render(myElement);
 
 
 
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <>
+      <h1>Hello World</h1> 
+    </>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+// const myElement = <h1>React is {5 + 5} times better with JSX</h1>;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
