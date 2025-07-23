@@ -76,3 +76,74 @@
 
 
 
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Semantic Elements Example</title>
+</head>
+<body>
+
+  <!-- Page Header -->
+  <header>
+    <hgroup>
+      <h1>Tech News Daily</h1>
+      <h2>Your source for the latest in tech</h2>
+    </hgroup>
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Articles</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Section -->
+  <section>
+    <article>
+      <header>
+        <h2>OpenAI Launches GPT-5</h2>
+        <p>Published on <time datetime="2025-07-22">July 22, 2025</time> by Jane Doe</p>
+      </header>
+      <p>Today, OpenAI released its much-anticipated <mark>GPT-5 model</mark>, revolutionizing the way we interact with machines.</p>
+      <p>The new model can understand and generate even more accurate and natural responses...</p>
+    </article>
+
+    <article>
+      <header>
+        <h2>SpaceX Prepares for Mars Mission</h2>
+        <p>Updated <time datetime="2025-07-20T18:00">2 days ago</time></p>
+      </header>
+      <p>Elon Musk confirmed that the <mark>first human-crewed Mars mission</mark> is on track for launch in 2026.</p>
+    </article>
+  </section>
+
+  <!-- Sidebar -->
+  <aside>
+    <h3>Trending Topics</h3>
+    <ul>
+      <li>AI in Education</li>
+      <li>Quantum Computing</li>
+      <li>Electric Vehicles</li>
+    </ul>
+  </aside>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Tech News Daily. All rights reserved.</p>
+    <p>Contact us at <a href="mailto:contact@technewsdaily.com">contact@technewsdaily.com</a></p>
+  </footer>
+
+</body>
+</html>
+
+
+
+
