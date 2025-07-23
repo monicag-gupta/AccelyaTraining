@@ -3,3 +3,5 @@ npm install -g typescript
 
 Open PowerShell as admin:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+Press A to have all apps remotely signed
