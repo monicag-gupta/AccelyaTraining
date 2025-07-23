@@ -147,3 +147,97 @@
 
 
 
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced HTML Input Examples</title>
+</head>
+<body>
+
+  <h1>HTML Input Tag Examples with Placeholder, Pattern, List</h1>
+
+  <form>
+
+    <!-- Text Input with Placeholder and Max Length -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username" maxlength="15" required>
+    <br><br>
+
+    <!-- Password with Pattern -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" 
+           placeholder="Min 8 chars, 1 number" 
+           pattern="(?=.*\d).{8,}" 
+           title="Must be at least 8 characters and include a number" required>
+    <br><br>
+
+    <!-- Email Input -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="example@email.com" required>
+    <br><br>
+
+    <!-- Phone Number with Pattern -->
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" placeholder="123-456-7890" 
+           pattern="\d{3}-\d{3}-\d{4}" 
+           title="Format: 123-456-7890">
+    <br><br>
+
+    <!-- Number with Step and Min/Max -->
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" min="18" max="100" step="1" required>
+    <br><br>
+
+    <!-- Date Input -->
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob">
+    <br><br>
+
+    <!-- Range Input -->
+    <label for="satisfaction">Satisfaction (1-10):</label>
+    <input type="range" id="satisfaction" name="satisfaction" min="1" max="10">
+    <br><br>
+
+    <!-- URL Input -->
+    <label for="website">Website:</label>
+    <input type="url" id="website" name="website" placeholder="https://example.com">
+    <br><br>
+
+    <!-- Search Input -->
+    <label for="search">Search:</label>
+    <input type="search" id="search" name="search" placeholder="Search...">
+    <br><br>
+
+    <!-- Datalist (List) Example -->
+    <label for="browser">Choose a browser:</label>
+    <input list="browsers" name="browser" id="browser" placeholder="Type or select...">
+    <datalist id="browsers">
+      <option value="Chrome">
+      <option value="Firefox">
+      <option value="Safari">
+      <option value="Edge">
+      <option value="Opera">
+    </datalist>
+    <br><br>
+
+    <!-- File Upload -->
+    <label for="resume">Upload Resume (PDF):</label>
+    <input type="file" id="resume" name="resume" accept=".pdf">
+    <br><br>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Submit">
+
+  </form>
+
+</body>
+</html>
+
+
+
