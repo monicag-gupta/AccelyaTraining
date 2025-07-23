@@ -99,3 +99,34 @@ function display(value: (number | string))
 }  
 display(123);  //The given value is of type number.
 display("ABC");  //The given value is of type string.
+
+
+
+
+
+
+
+
+
+
+
+//String Initialization  
+let str1: string = 'Typescript';  
+let str2: string = ' is great';  
+let str3 = str1.concat(str2);
+//String Concatenation  
+console.log("Combined Result: " +str3); //Combined Result: Typescript is great 
+//String charAt  
+console.log("Character At 5: " +str2.charAt(5));  //Character At 5: r
+//String indexOf  
+console.log("Index of r: " +str2.indexOf('r'));  //Index of r: 5
+//String replace  
+console.log("After Replacement: " +str1.replace('Type', 'Java')); //After Replacement: Javascript 
+//String uppercase  
+console.log("UpperCase: " + str1.concat(str2).toUpperCase());  //UpperCase: TYPESCRIPT IS GREAT
+let arr:string[] = str3.split(" "); 
+console.log("The array after split, gives the words as: " + arr);
+//The array after split, gives the words as: Typescript,is,great
+console.log("Slicing 4th charater to 7th character: " + str1.slice(4,7)); //Slicing 4th charater to 7th character: scr
+console.log("Trimming the spaces: " + str2.trim()); //Trimming the spaces: is great
+
