@@ -322,6 +322,36 @@ obj.doPrint()
 
 
 
+class StaticMem {  
+   static num:number; 
+  
+   static disp():void { 
+      console.log("The value of num is "+ StaticMem.num) 
+   } 
+  disp2():void { 
+      console.log("The value of num is "+ StaticMem.num) 
+   } 
+} 
+
+StaticMem.num = 12     // initialize the static variable 
+StaticMem.disp()
+var obj=new StaticMem();
+obj.disp2();
+//obj.num //not allowed as num is static
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
