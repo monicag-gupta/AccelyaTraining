@@ -191,6 +191,33 @@ export default App;
 
 
 
+
+import React, { Component } from 'react';  
+function App(){  
+    
+     var myStyle = {  
+         fontSize: 80,  
+         fontFamily: 'Courier',  
+         color: '#003300'  
+      }  
+      return (  
+         <div>  
+            <h1 style = {myStyle}>Hello World!</h1> 
+         </div>  
+      );  
+   }  
+ 
+export default App; 
+
+
+
+
+
+
+
+
+
+
 import React from "react";
 import ReactDOM from 'react-dom/client';
 import App from "./App";
