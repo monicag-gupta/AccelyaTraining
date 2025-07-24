@@ -777,3 +777,31 @@ root.render(
     <React.StrictMode><App /></React.StrictMode>
 );
 
+
+
+
+
+
+
+import { useState } from "react";
+import ReactDOM from "react-dom/client";
+function Car() {
+  const [car, setCar] = useState({brand: "Ford", model: "Mustang", year: "1964", color: "red"});
+  const updateColor1 = () => {
+    setCar(previousState => { return { ...previousState, color: "blue" } });
+  }
+  const updateColor2 = () => {
+    setCar(previousState => { return { ...previousState, color: "red" } });
+  }
+  return (
+    <>
+      <h1>My {car.brand}</h1>
+      <p> It is a {car.color} {car.model} from {car.year}. </p>
+      <button type="button" onClick={updateColor1}>Blue</button>
+      <button type="button" onClick={updateColor2}>Red</button>
+    </>
+  )
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car />);
+
