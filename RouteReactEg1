@@ -87,6 +87,68 @@ export default Layout;
 
 
 
+pages/ Home.js
+
+const Home = () => {
+    return <h1>This is the Home Page</h1>;
+  };
+  
+  export default Home;
+
+
+
+
+
+pages/ Blogs.js
+
+const Blogs = () => {
+    return <h1>Blog Articles</h1>;
+  };
+  
+  export default Blogs;
+
+
+
+
+pages/ Contact.js
+
+
+const Contact = () => {
+  return <h1>Contact Me</h1>;
+};
+
+export default Contact;
+
+
+
+
+
+
+
+
+pages/ NoPage.js
+
+
+const NoPage = () => {
+  return <h1>404 Page not found</h1>;
+};
+
+export default NoPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
