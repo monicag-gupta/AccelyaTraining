@@ -1074,6 +1074,20 @@ export default App;
 
 
 
+Select (drop down list): 
+Study .Net
+Study Java
+Code in React
+Code in SB
+Button : [ADD Task]
+
+List of Tasks: (bulleted list)
+(get the tasks added)
+
+
+
+
+
 
 
 
