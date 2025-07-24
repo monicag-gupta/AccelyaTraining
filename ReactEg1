@@ -554,3 +554,101 @@ root.render(<Car brand="Ford"/>);
 
 
 
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+class Car extends React.Component {  
+  constructor(props) {  
+     super(props);  
+     this.state = {brand: "Ford"};  
+     this.changeState = this.changeState.bind(this)  
+  }    
+  render() {  
+     return (    <div>  
+            <h1>ReactJS component's Lifecycle</h1>  
+            <h3>My Car is a {this.state.brand}</h3>  
+            <button onClick = {this.changeState}>Click Here!</button>          
+        </div>    );  
+  }  
+  componentWillMount() {  console.log('Component Will MOUNT!');   }  
+  componentDidMount() {   console.log('Component Did MOUNT!');  }  
+  changeState(){  this.setState({brand:"Mustang!!- Its a great Car Brand."});   }  
+  componentWillReceiveProps(newProps) {   console.log('Component Will Recieve Props!');  }  
+  shouldComponentUpdate(newProps, newState) {   return true;    }  
+  componentWillUpdate(nextProps, nextState) {  console.log('Component Will UPDATE!');  }  
+  componentDidUpdate(prevProps, prevState) {  console.log('Component Did UPDATE!');  }  
+  componentWillUnmount() {  console.log('Component Will UNMOUNT!');  }  
+}  
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car/>);
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+class Car extends React.Component {  
+  constructor(props) {  
+     super(props);  
+     this.state = {brand: "Ford"};  
+     this.changeState = this.changeState.bind(this)  
+  }    
+  render() {  
+     return (    
+         <div>  
+            <h1>ReactJS component's Lifecycle with property: {this.props.name}</h1>  
+            <h3>My Car is a {this.state.brand}</h3>  
+            <button onClick = {this.changeState}>Click Here!</button>          
+        </div>    );  
+  }  
+  //componentWillMount() {  console.log('Component Will MOUNT!');   }  
+  componentDidMount() {   console.log('Component Did MOUNT!');  }  
+  changeState(){  this.setState({brand:"Mustang!!- Its a great Car Brand."});   }  
+  //componentWillReceiveProps(newProps) {   console.log('Component Will Recieve Props!');  }  
+  shouldComponentUpdate(newProps, newState) {   console.log('Component Prop/State changed or not? true'); return true;    }  
+  //componentWillUpdate(nextProps, nextState) {  console.log('Component Will UPDATE!');  }  
+  componentDidUpdate(prevProps, prevState) {  console.log('Component Did UPDATE!');  }  
+  componentWillUnmount() {  console.log('Component Will UNMOUNT!');  }  
+}  
+class Cars extends React.Component{
+   constructor(){
+      super();
+      this.state={x:false}
+      this.btn=this.btn.bind(this);
+   }
+   btn(){
+      //document.getElementById("car").innerText="<Car name='MyCar'/>";
+      this.setState({ x:!this.state.x });
+   }
+   render(){
+  // btn = ()=>"<Car name='MyCar'/>";
+   return (
+   <div>
+   <button onClick={this.btn}>Click to (un)load Car</button>
+   <div>{this.state.x && <Car name='MyCar'/>}</div>
+   </div>
+   );
+}
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Cars/>);
+
+
+
+
+
+
+
+
+
