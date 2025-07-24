@@ -203,6 +203,8 @@ function App(){
       return (  
          <div>  
             <h1 style = {myStyle}>Hello World!</h1> 
+		        {/* This is a comment in JSX */}   
+
          </div>  
       );  
    }  
