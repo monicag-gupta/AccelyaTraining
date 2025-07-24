@@ -279,5 +279,27 @@ root.render(<Car />);
 
 
 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+class Car extends React.Component {
+  constructor() {
+    super();
+    this.state = {myKey: "red"};
+  }
+  render() {
+    var styles={color:this.state.myKey}
+    return <h2 style={styles}>I am a {this.state.myKey} Car!</h2>;
+  }
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car />);
+
+
+
+
+
+
+
+
 
 
