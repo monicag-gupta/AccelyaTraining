@@ -1,1 +1,5 @@
+npx create-react-app route-react-app
+
+cd route-react-app
+
 npm install react-router-dom --save   
