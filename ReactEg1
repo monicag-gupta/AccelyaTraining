@@ -652,3 +652,49 @@ root.render(<Cars/>);
 
 
 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+class Car extends React.Component {  
+    constructor(props) {  
+        super(props);  
+        this.updateSubmit = this.updateSubmit.bind(this);  
+        this.input1 = React.createRef();  
+        this.input2 = React.createRef(); 
+    }  
+    updateSubmit(event) {  
+        var entry = this.input1.current.value + " and CompanyName: " + this.input2.current.value;
+        alert('You have entered the required Brand: '+ entry + ' successfully.');  
+        event.preventDefault();  
+    }  
+    render() {  
+      return (  
+        <form onSubmit={this.updateSubmit}>  
+          <h1>Uncontrolled Form Example</h1>  
+          <br/><label>Enter Brand Name: <input type="text" ref={this.input1} />  </label>  
+          <br/><label>Enter CompanyName: <input type="text" ref={this.input2} /> </label>  
+          <br/><input type="submit" value="Submit" />  
+        </form>  
+      );  
+    }  
+  }  
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car />);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
