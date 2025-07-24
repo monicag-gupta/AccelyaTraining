@@ -1001,6 +1001,47 @@ root.render(<Cars />);
 
 
 
+import React, { useState } from 'react';
+
+function App() {
+  const [name, setName] = useState('');
+
+  const handleChange = (e) => {
+    setName(e.target.value);  // Updates state when input changes
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();  // Prevents page refresh
+    alert(`Submitted Name: ${name}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Enter Name: </label>
+      <input 
+        type="text"
+        value={name}          // Controlled by state
+        onChange={handleChange} // Updates state
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
