@@ -3,3 +3,36 @@ npx create-react-app route-react-app
 cd route-react-app
 
 npm install react-router-dom --save   
+
+
+
+
+Create a pages folder : pages
+Put all the required pages there
+Layout.js
+Home.js
+Blogs.js
+Contact.js
+NoPage.js
+Link it to main App, Edit: index.js
+We wrap our content first with <BrowserRouter>.
+Then we define our <Routes>. An application can have multiple <Routes>. Our basic example only uses one.
+<Route>s can be nested. The first <Route> has a path of / and renders the Layout component.
+The nested <Route>s inherit and add to the parent route. So the blogs path is combined with the parent and becomes /blogs.
+The Home component route does not have a path but has an index attribute. That specifies this route as the default route for the parent route, which is /.
+Setting the path to * will act as a catch-all for any undefined URLs. This is great for a 404 error page.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
