@@ -1,1 +1,21 @@
 npm install --save-dev webpack @babel/plugin-syntax-dynamic-import
+
+
+
+
+
+math.js
+
+// math.js
+export function add(a, b) {
+  return a + b;
+}
+
+
+
+
+
+
+
+
+
