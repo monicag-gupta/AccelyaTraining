@@ -305,11 +305,111 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 function Car(props) {
-  return <h2>I am a {props.color} Car!</h2>;
+  return <h2>I am a {props.color} Car!
+<td><Wheels type="Titanium Alloy"></td></h2>;
+
+
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Car color="red"/>);
+
+
+
+
+
+
+
+
+
+
+
+Solution:
+
+index.js:
+
+import React,{Component} from 'react';
+import ReactDOM from 'react-dom/client';
+import Car from './Components/Car';
+
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car />);
+
+
+
+
+Components/Seats.js:
+
+import React,{Component} from 'react';
+
+export default class Seats extends  Component{
+    render(){return (
+        <tr>
+            <td>Seats : 2 Single Seats, 1 three Seater Seat </td>
+            <td>3</td>
+        </tr>
+    );
+    }
+  }
+  
+
+
+
+
+Components/Engine.js:
+
+import React,{Component} from 'react';
+
+export default class Engine extends  Component{
+    render(){return <tr><td>Engine : Strong, super fast</td><td>1</td></tr>;}
+  }
+  
+
+
+
+Components/Wheels.js:
+
+import React,{Component} from 'react';
+
+export default class Wheels extends  Component{
+    render(){return <tr><td>Wheels: Titanium Alloy</td><td>4</td></tr>;}
+  }
+  
+
+
+
+
+Components/Car.js:
+
+import React,{Component} from 'react';
+import Engine from './Engine';
+import Wheels from './Wheels';
+import Seats from './Seats';
+
+export default class Car extends  Component{
+    render(){
+    return (
+      <>
+        <h2>I am a Car!<br/> Parts: </h2>
+        <table border="1">
+          <tr><th>Parts</th><th>NoOfParts</th></tr>
+          <Engine />
+          <Wheels />
+          <Seats/>
+        </table>
+      </>
+    );
+  }
+  }
+
+
+
+
+
+
+
 
 
 
