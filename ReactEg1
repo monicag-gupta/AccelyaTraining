@@ -930,6 +930,74 @@ export default App;
 
 
 
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+
+function Car({ name }) {
+  const [brand, setBrand] = useState("Ford");
+
+  // Simulates componentDidMount
+  useEffect(() => {
+    console.log('Component Did MOUNT!');
+  }, []);
+
+  // Simulates componentDidUpdate for 'brand' state
+  useEffect(() => {
+    if (brand !== "Ford") {
+      console.log('Component Did UPDATE!');
+    }
+  }, [brand]);
+
+  // Simulates componentWillUnmount
+  useEffect(() => {
+    return () => {
+      console.log('Component Will UNMOUNT!');
+    };
+  }, []);
+
+  const changeState = () => {
+    setBrand("Mustang!! - Its a great Car Brand.");
+  };
+
+  return (
+    <div>
+      <h1>ReactJS component's Lifecycle with property: {name}</h1>
+      <h3>My Car is a {brand}</h3>
+      <button onClick={changeState}>Click Here!</button>
+    </div>
+  );
+}
+
+function Cars() {
+  const [showCar, setShowCar] = useState(false);
+
+  const toggleCar = () => {
+    setShowCar(prev => !prev);
+  };
+
+  return (
+    <div>
+      <button onClick={toggleCar}>Click to (un)load Car</button>
+      <div>{showCar && <Car name="MyCar" />}</div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Cars />);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
