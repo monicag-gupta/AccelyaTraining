@@ -1040,6 +1040,37 @@ export default App;
 
 
 
+import React, { useRef } from 'react';
+
+function App() {
+  const nameRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevents page refresh
+    alert(`Submitted Name: ${nameRef.current.value}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Enter Name: </label>
+      <input 
+        type="text" 
+        ref={nameRef} // Direct access to the DOM input element
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
 
 
 
