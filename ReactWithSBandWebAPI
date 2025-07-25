@@ -47,6 +47,164 @@ Do not use HTTPS (if your company has certificate for SSL, then install the cert
 
 
 
+NuGet Packages
+
+Npgsql.EntityFrameworkCore.PostgreSQL
+Microsoft.EntityFrameworkCore.Tools
+Swashbuckle.AspNetCore
+
+
+
+
+  using System.ComponentModel.DataAnnotations.Schema;
+
+    namespace WebAPI_EF_Prj.Models
+    {
+        [Table("emptbl")]
+        public class EmpTbl
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+            public string department { get; set; }
+        }
+
+    }
+
+
+
+
+
+
+using Microsoft.EntityFrameworkCore;
+using WebAPI_EF_Prj.Models;
+
+namespace WebAPI_EF_Prj.Data
+{
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public DbSet<EmpTbl> EmpTbls { get; set; }
+    }
+
+}
+
+
+
+
+
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebAPI_EF_Prj.Data;
+using WebAPI_EF_Prj.Models;
+
+namespace WebAPI_EF_Prj.Controllers
+{
+    [EnableCors("AllowAll")]
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EmpTblController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+        public EmpTblController(AppDbContext context) => _context = context;
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EmpTbl>>> GetAll() =>
+            await _context.EmpTbls.ToListAsync();
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EmpTbl>> GetById(int id)
+        {
+            var emp = await _context.EmpTbls.FindAsync(id);
+            return emp == null ? NotFound() : emp;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<EmpTbl>> Create(EmpTbl emp)
+        {
+            _context.EmpTbls.Add(emp);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetById), new { id = emp.id }, emp);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, EmpTbl emp)
+        {
+            if (id != emp.id) return BadRequest();
+            _context.Entry(emp).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var emp = await _context.EmpTbls.FindAsync(id);
+            if (emp == null) return NotFound();
+            _context.EmpTbls.Remove(emp);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+    }
+}
+
+
+
+
+
+using Microsoft.EntityFrameworkCore;
+using WebAPI_EF_Prj.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.WithOrigins("http://localhost:3000")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+});
+
+
+var app = builder.Build();
+
+app.UseCors("AllowAll");
+
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    //app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+
+
+
+
+
 
 
 
