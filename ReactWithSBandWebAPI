@@ -569,6 +569,161 @@ export default App;
 
 
 
+App.js:
+
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const API_BASE = 'http://localhost:5234/api/EmpTbl';
+
+function App() {
+  const [employees, setEmployees] = useState([]);
+  const [form, setForm] = useState({ name: '', department: '' });
+  const [editId, setEditId] = useState(null);
+  const [searchId, setSearchId] = useState('');
+  const [searchedEmp, setSearchedEmp] = useState(null);
+
+  const loadEmployees = async () => {
+    try {
+      const res = await axios.get(API_BASE);
+      setEmployees(res.data);
+    } catch (error) {
+      console.error('Error loading employees:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadEmployees();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (editId === null) {
+        await axios.post(API_BASE, form);
+      } else {
+        await axios.put(`${API_BASE}/${editId}`, { id: editId, ...form });
+      }
+      setForm({ name: '', department: '' });
+      setEditId(null);
+      loadEmployees();
+    } catch (error) {
+      alert('Error saving employee: ' + error.message);
+    }
+  };
+
+  const handleEdit = (emp) => {
+    setForm({ name: emp.name, department: emp.department });
+    setEditId(emp.id);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this employee?')) {
+      await axios.delete(`${API_BASE}/${id}`);
+      loadEmployees();
+    }
+  };
+
+  const handleSearchById = async () => {
+    try {
+      const res = await axios.get(`${API_BASE}/${searchId}`);
+      setSearchedEmp(res.data);
+    } catch (error) {
+      alert('Employee not found with ID: ' + searchId);
+      setSearchedEmp(null);
+    }
+  };
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h2>Employee Management</h2>
+
+      {/* Create/Update Form */}
+      <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={form.name}
+          required
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Department"
+          value={form.department}
+          required
+          onChange={(e) => setForm({ ...form, department: e.target.value })}
+        />
+        <button type="submit">{editId ? 'Update' : 'Add'} Employee</button>
+      </form>
+
+      {/* Search by ID */}
+      <div style={{ marginBottom: '20px' }}>
+        <input
+          type="number"
+          placeholder="Search Employee by ID"
+          value={searchId}
+          onChange={(e) => setSearchId(e.target.value)}
+        />
+        <button onClick={handleSearchById}>Search</button>
+      </div>
+
+      {/* Display searched employee */}
+      {searchedEmp && (
+        <div style={{ marginBottom: '20px' }}>
+          <h4>Employee Found:</h4>
+          <table border="1" cellPadding="5">
+            <thead>
+              <tr>
+                <th>ID</th><th>Name</th><th>Department</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{searchedEmp.id}</td>
+                <td>{searchedEmp.name}</td>
+                <td>{searchedEmp.department}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* All Employees in Table */}
+      <h3>All Employees</h3>
+      <table border="1" cellPadding="8" cellSpacing="0">
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Department</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employees.map(emp => (
+            <tr key={emp.id}>
+              <td>{emp.id}</td>
+              <td>{emp.name}</td>
+              <td>{emp.department}</td>
+              <td>
+                <button onClick={() => handleEdit(emp)}>Edit</button>&nbsp;
+                <button onClick={() => handleDelete(emp.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+          {employees.length === 0 && (
+            <tr><td colSpan="4">No employees found.</td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
 
 
 
