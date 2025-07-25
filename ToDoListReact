@@ -1,0 +1,105 @@
+index.js:
+
+import ReactDOM from "react-dom/client";
+import React from "react";
+import App from "./App";
+
+
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
+
+
+
+App.js:
+
+import React, { useState } from 'react';
+
+function App() {
+  const predefinedTasks = [
+    "Buy groceries",
+    "Read a book",
+    "Go for a walk",
+    "Write journal",
+    "Learn React"
+  ];
+
+  const [selectedTask, setSelectedTask] = useState("");
+  const [taskList, setTaskList] = useState([]);
+  const [message, setMessage] = useState("");
+
+  const addTask = () => {
+    if (selectedTask !== "") {
+      const alreadyExists = taskList.some(task => task.name === selectedTask);
+      if (alreadyExists) {
+        setMessage("❗ Task already exists in the list.");
+      } else {
+        setTaskList([...taskList, { name: selectedTask, done: false }]);
+        setMessage(""); // Clear message
+      }
+    }
+  };
+
+  const deleteTask = (indexToDelete) => {
+    const updated = [...taskList];
+    updated.splice(indexToDelete, 1);
+    setTaskList(updated);
+    setMessage("");
+  };
+
+  const toggleDone = (index) => {
+    const updated = [...taskList];
+    updated[index].done = !updated[index].done;
+    setTaskList(updated);
+  };
+
+  return (
+    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+      <h2>✅ Choose a Task</h2>
+
+      <select value={selectedTask} onChange={(e) => setSelectedTask(e.target.value)}>
+        <option value="">-- Select a task --</option>
+        {predefinedTasks.map((task, index) => (
+          <option key={index} value={task}>{task}</option>
+        ))}
+      </select>
+
+      <button
+        onClick={addTask}
+        disabled={selectedTask === ""}
+        style={{ marginLeft: '10px' }}
+      >
+        Add Task
+      </button>
+
+      {/* Message if task already exists */}
+      {message && <p style={{ color: 'red' }}>{message}</p>}
+
+      <h3>📝 Task List</h3>
+      <ul>
+        {taskList.map((task, index) => (
+          <li key={index}>
+            <input
+              type="checkbox"
+              checked={task.done}
+              onChange={() => toggleDone(index)}
+            />
+            <span style={{
+              textDecoration: task.done ? 'line-through' : 'none',
+              marginLeft: '8px'
+            }}>
+              {task.name}
+            </span>
+            <button onClick={() => deleteTask(index)} style={{ marginLeft: '10px' }}>
+              ❌
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
