@@ -205,6 +205,11 @@ app.Run();
 
 
 
+http://localhost:5234/swagger/index.html
+
+
+
+
 
 
 
