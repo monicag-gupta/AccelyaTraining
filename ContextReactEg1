@@ -42,3 +42,117 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById('root')); 
 root.render(<App />);
 
+
+
+
+
+
+
+
+
+
+
+Create a Context in src: ThemeContext.js :
+
+
+// ThemeContext.js
+import React from 'react'
+const ThemeContext = React.createContext(
+   {
+   mycolor: 'blue',
+   mybackgroundColor: 'yellow'
+}
+)
+export default ThemeContext
+
+
+
+
+
+
+
+
+
+
+
+
+
+Update Component using the Context Consumer in src/ HelloWorld.js :
+
+
+import React from "react";
+import ThemeContext from "./ThemeContext";
+class HelloWorld extends React.Component {
+   render() {
+      return  (
+         <ThemeContext.Consumer>
+         {({mycolor, mybackgroundColor} ) =>
+            (<div style={{
+               color: mycolor,
+               backgroundColor: mybackgroundColor }}>
+               Hello World
+            </div>)
+         }
+         </ThemeContext.Consumer>
+      )
+   }
+}
+export default HelloWorld
+
+
+
+
+
+
+
+
+Set provider in root component in src: App.js 
+
+import './App.css';
+import HelloWorld from './HelloWorld';
+import ThemeContext from './ThemeContext'
+
+function App() {
+   return (
+      // <ThemeContext.Provider value={{
+      //    mycolor: 'white',
+      //    mybackgroundColor: 'green'
+      // }}>
+      <HelloWorld />
+      // </ThemeContext.Provider>
+   );
+}
+export default App;
+
+
+
+
+
+
+import './App.css';
+import HelloWorld from './HelloWorld';
+import ThemeContext from './ThemeContext'
+
+function App() {
+   return (
+      <ThemeContext.Provider value={{
+         mycolor: 'white',
+         mybackgroundColor: 'green'
+      }}>
+      <HelloWorld />
+      </ThemeContext.Provider>
+   );
+}
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
