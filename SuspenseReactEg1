@@ -58,6 +58,30 @@ root.render(<App />);
 
 
 
+Code Splitting : index.js
+
+//index.js
+import ReactDOM from "react-dom/client";
+function App(){
+  return(
+    <h1>Add Called from math.js: <br/>
+     {require('./math').add(16, 26)}
+    </h1>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
