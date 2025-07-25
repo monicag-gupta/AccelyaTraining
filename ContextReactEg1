@@ -1,0 +1,32 @@
+import React, { Component } from 'react';
+
+// 1️⃣ Create the Context
+const MyContext = React.createContext();
+
+class Child extends Component {
+  // 2️⃣ Use context in class component
+  static contextType = MyContext; 
+  // Links the context to this component
+
+  render() {
+    // Access the context value by:
+    return <h2>Hello, {this.context}!</h2>;
+  }
+}
+
+class App extends Component {
+  render() {
+    return (
+      // 3️⃣ Provide a value to the context
+      <MyContext.Provider value="React Learner">
+        <div>
+          <h1>Context API with Class Components</h1>
+          <Child />
+        </div>
+      </MyContext.Provider>
+    );
+  }
+}
+
+export default App;
+
