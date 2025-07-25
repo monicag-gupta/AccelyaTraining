@@ -417,6 +417,154 @@ npm install axios
 
 
 
+For Information:
+
+import axios from 'axios';
+
+const API_BASE_URL = "http://localhost:5000/api/employees";
+
+export const getEmployees = () => axios.get(API_BASE_URL);
+export const getEmployee = (id) => axios.get(`${API_BASE_URL}/${id}`);
+export const addEmployee = (employee) => axios.post(API_BASE_URL, employee);
+export const updateEmployee = (id, employee) => axios.put(`${API_BASE_URL}/${id}`, employee);
+export const deleteEmployee = (id) => axios.delete(`${API_BASE_URL}/${id}`);
+
+
+
+
+
+
+
+
+
+
+App.js:
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [emps, setEmps] = useState([]);
+  const [form, setForm] = useState({ id: '', name: '', department: '' });
+  const [editingId, setEditingId] = useState(null);
+  const [searchId, setSearchId] = useState('');
+  const [foundEmp, setFoundEmp] = useState(null);
+
+  const baseURL = "http://localhost:8080/api/employees";
+
+  const loadEmps = async () => {
+    const res = await axios.get(baseURL);
+    setEmps(res.data);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (editingId) {
+      await axios.put(`${baseURL}/${editingId}`, form);
+      setEditingId(null);
+    } else {
+      await axios.post(baseURL, form);
+    }
+    setForm({ id: '', name: '', department: '' });
+    loadEmps();
+  };
+
+  const handleEdit = (emp) => {
+    setForm({ name: emp.name, department: emp.department });
+    setEditingId(emp.id);
+  };
+
+  const handleDelete = async (id) => {
+    await axios.delete(`${baseURL}/${id}`);
+    loadEmps();
+  };
+
+  const handleSearch = async () => {
+    try {
+      const res = await axios.get(`${baseURL}/${searchId}`);
+      setFoundEmp(res.data);
+    } catch (error) {
+      setFoundEmp(null);
+      alert("Employee not found!");
+    }
+  };
+
+  useEffect(() => {
+    loadEmps();
+  }, []);
+
+  return (
+    <div className="App" style={{ padding: '20px', fontFamily: 'Arial' }}>
+      <h2>Employee Management</h2>
+
+      {/* Add / Edit Employee Form */}
+      <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+        <input
+          placeholder="Name"
+          value={form.name}
+          onChange={e => setForm({ ...form, name: e.target.value })}
+          required
+        />
+        <input
+          placeholder="Department"
+          value={form.department}
+          onChange={e => setForm({ ...form, department: e.target.value })}
+          required
+        />
+        <button type="submit">{editingId ? "Update" : "Add"} Employee</button>
+      </form>
+
+      {/* Search by ID */}
+      <div style={{ marginBottom: '20px' }}>
+        <input
+          type="number"
+          placeholder="Enter ID to search"
+          value={searchId}
+          onChange={e => setSearchId(e.target.value)}
+        />
+        <button onClick={handleSearch}>Get By ID</button>
+        {foundEmp && (
+          <div>
+            <strong>Found:</strong> {foundEmp.id}. {foundEmp.name} ({foundEmp.department})
+          </div>
+        )}
+      </div>
+
+      {/* Table for Employees */}
+      <table border="1" cellPadding="10" cellSpacing="0">
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Department</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {emps.map(emp => (
+            <tr key={emp.id}>
+              <td>{emp.id}</td>
+              <td>{emp.name}</td>
+              <td>{emp.department}</td>
+              <td>
+                <button onClick={() => handleEdit(emp)}>Edit</button>
+                <button onClick={() => handleDelete(emp.id)} style={{ marginLeft: '5px' }}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
 
 
 
