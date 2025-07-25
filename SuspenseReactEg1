@@ -33,6 +33,8 @@ root.render(<App />);
 
 
 
+Bundle : index.js
+
 
 
 import ReactDOM from "react-dom/client";
@@ -71,6 +73,44 @@ function App(){
 }
 const root = ReactDOM.createRoot(document.getElementById('root')); 
 root.render(<App />);
+
+
+
+
+
+
+
+
+//index.js
+import ReactDOM from "react-dom/client";
+import { useState } from "react";
+
+function App(){
+    const [a,setA] =useState(0);
+    var clicked = ()=>{setA(require('./math').add(16, 26)); }
+  return(
+    <h1>Add Called from math.js: <br/>
+    <button onClick={clicked}> click</button>
+    {a}
+    </h1>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
