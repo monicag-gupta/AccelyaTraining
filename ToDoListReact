@@ -103,3 +103,177 @@ function App() {
 
 export default App;
 
+
+
+
+
+
+App.js:
+
+import React, { useState, useEffect } from 'react';
+
+function App() {
+  const predefinedTasks = [
+    "Buy groceries",
+    "Read a book",
+    "Go for a walk",
+    "Write journal",
+    "Learn React"
+  ];
+
+  const [customTask, setCustomTask] = useState("");
+  const [selectedTask, setSelectedTask] = useState("");
+  const [category, setCategory] = useState("Work");
+  const [taskList, setTaskList] = useState([]);
+  const [message, setMessage] = useState("");
+
+  // Load from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("taskList");
+    if (saved) {
+      setTaskList(JSON.parse(saved));
+    }
+  }, []);
+
+  // Save to localStorage
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, [taskList]);
+
+  const getTaskInput = () => customTask.trim() || selectedTask;
+
+  const addTask = () => {
+    const taskToAdd = getTaskInput();
+    if (!taskToAdd) return;
+
+    const alreadyExists = taskList.some(task =>
+      task.name.toLowerCase() === taskToAdd.toLowerCase()
+    );
+
+    if (alreadyExists) {
+      setMessage("❗ Task already exists!");
+    } else {
+      setTaskList([
+        ...taskList,
+        { name: taskToAdd, done: false, category }
+      ]);
+      setMessage("");
+      setCustomTask("");
+      setSelectedTask("");
+    }
+  };
+
+  const deleteTask = (indexToDelete) => {
+    const updated = [...taskList];
+    updated.splice(indexToDelete, 1);
+    setTaskList(updated);
+    setMessage("");
+  };
+
+  const toggleDone = (index) => {
+    const updated = [...taskList];
+    updated[index].done = !updated[index].done;
+    setTaskList(updated);
+  };
+
+  const groupedTasks = {
+    Work: taskList.filter(task => task.category === "Work"),
+    Personal: taskList.filter(task => task.category === "Personal"),
+  };
+
+  return (
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">📝 React To-Do List</h2>
+
+      <div className="card p-3 shadow-sm">
+        <div className="mb-3 row">
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Type a new task"
+              value={customTask}
+              onChange={(e) => setCustomTask(e.target.value)}
+            />
+          </div>
+
+          <div className="col-md-4">
+            <select
+              className="form-select"
+              value={selectedTask}
+              onChange={(e) => setSelectedTask(e.target.value)}
+            >
+              <option value="">-- Or choose from list --</option>
+              {predefinedTasks.map((task, i) => (
+                <option key={i} value={task}>{task}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="col-md-2">
+            <select
+              className="form-select"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="Work">Work</option>
+              <option value="Personal">Personal</option>
+            </select>
+          </div>
+
+          <div className="col-md-2">
+            <button
+              className="btn btn-primary w-100"
+              onClick={addTask}
+              disabled={!getTaskInput()}
+            >
+              Add Task
+            </button>
+          </div>
+        </div>
+
+        {message && <div className="alert alert-danger">{message}</div>}
+      </div>
+
+      <div className="row mt-4">
+        {["Work", "Personal"].map((cat) => (
+          <div className="col-md-6" key={cat}>
+            <h4>{cat} Tasks</h4>
+            {groupedTasks[cat].length === 0 ? (
+              <p className="text-muted">No tasks</p>
+            ) : (
+              <ul className="list-group">
+                {groupedTasks[cat].map((task, index) => (
+                  <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <input
+                        type="checkbox"
+                        className="form-check-input me-2"
+                        checked={task.done}
+                        onChange={() => toggleDone(taskList.indexOf(task))}
+                      />
+                      <span style={{ textDecoration: task.done ? 'line-through' : 'none' }}>
+                        {task.name}
+                      </span>
+                    </div>
+                    <button
+                      className="btn btn-sm btn-outline-danger"
+                      onClick={() => deleteTask(taskList.indexOf(task))}
+                    >
+                      ❌
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+
+
