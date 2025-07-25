@@ -104,6 +104,47 @@ root.render(<App />);
 
 
 
+React.Lazy:
+
+React.lazy: math.js
+
+
+function add(a, b) {
+    return a + b;
+  }
+export default function Math(){
+  return (<h1>{add(16, 26)}</h1>);
+}
+
+
+
+React.lazy : index.js:
+
+//index.js
+import ReactDOM from "react-dom/client";
+//import Math from "./math";
+import React from "react";
+//import {lazy} from "react";
+const Math = React.lazy(() => import('./math'));
+//const Math = lazy(() => import('./math'));
+function App(){
+  return(
+    <h1>Add Called from math.js: <br/>
+     <Math/>
+    </h1>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
+
+
+
+
+
+
+
 
 
 
