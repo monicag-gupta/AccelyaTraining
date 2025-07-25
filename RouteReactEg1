@@ -266,6 +266,43 @@ const root = ReactDOM.createRoot(document.getElementById('root')); root.render(<
 
 
 
+pages/ Login.js
+
+function Login() {
+   return (
+        <table>
+            <tr>
+                <td>LoginID: </td>
+                <td><input type="text"></input></td>
+            </tr><tr>
+                <td>Password: </td>
+                <td><input type="text"></input></td>
+            </tr>
+        </table>
+    );
+}
+export default Login;
+
+
+
+
+
+
+pages/ PrivateRoutes.js
+
+
+
+
+import { Outlet, Navigate } from 'react-router-dom'
+const PrivateRoutes = ({ isLoggedIn, children }) => {
+    if (!isLoggedIn) {
+        return <Navigate to="/" replace />;
+    }
+    return children;
+};
+export default PrivateRoutes
+
+
 
 
 
