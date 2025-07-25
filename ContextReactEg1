@@ -236,5 +236,120 @@ root.render(<Component1 />);
 
 
 
+Example2:
+
+
+Create a Context in src: ThemeContext.js :
+
+
+// ThemeContext.js
+import React from 'react'
+const ThemeContext = React.createContext(
+   {
+   mycolor: 'blue',
+   mybackgroundColor: 'yellow'
+}
+)
+export default ThemeContext
+
+
+
+
+App.js:
+
+import './App.css';
+import HelloWorld from './HelloWorld';
+import ThemeContext from './ThemeContext'
+
+function App() {
+   return (
+      <ThemeContext.Provider value={{
+         mycolor: 'white',
+         mybackgroundColor: 'green'
+      }}>
+      <HelloWorld />
+      </ThemeContext.Provider>
+   );
+}
+export default App;
+
+
+
+
+
+index.js:
+
+import ReactDOM from "react-dom/client";
+import React from "react";
+import App from "./App";
+
+
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
+
+
+HelloWorld.js
+
+import React, { useContext } from "react"
+import ThemeContext from './ThemeContext'
+function HelloWorld() {
+   let theme = useContext(ThemeContext)
+   return (
+      <div style={{
+         color: theme.mycolor,
+         backgroundColor: theme.mybackgroundColor }}>
+            Hello World
+      </div>
+   )
+}
+export default HelloWorld
+
+
+
+
+
+
+
+
+
+import './App.css';
+import HelloWorld from './HelloWorld';
+import ThemeContext from './ThemeContext'
+
+function App() {
+   return (
+    <>
+    <h1>Hello world with provider</h1>
+      <ThemeContext.Provider value={{
+         mycolor: 'white',
+         mybackgroundColor: 'green'
+      }}>
+      <HelloWorld />
+      </ThemeContext.Provider>
+
+      
+      <h1>Hello world without  provider</h1>
+      <HelloWorld />
+      </>
+   );
+}
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
