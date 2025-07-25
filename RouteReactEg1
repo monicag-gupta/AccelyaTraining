@@ -201,6 +201,36 @@ root.render(<App />);
 
 
 
+
+
+
+
+Creating Login Logout Simulation
+
+Create a pages folder : pages
+Put all the required pages there
+Layout.js
+Home.js
+Blogs.js
+Contact.js
+Login.js
+PrivateRoutes.js
+NoPage.js
+Link it to main App, Edit: index.js
+We wrap our content first with <BrowserRouter>.
+Then we define our <Routes>. 
+There is an Authenticated Blogs Link which is protected.
+The Home component route does not have a path but has an index attribute. That specifies this route as the default route for the parent route, which is /.
+Setting the path to * will act as a catch-all for any undefined URLs. This is great for a 404 error page.
+
+
+
+
+
+
+
+
+
 index.js:
 
 import ReactDOM from "react-dom/client";
