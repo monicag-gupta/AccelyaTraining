@@ -215,5 +215,179 @@ http://localhost:5234/swagger/index.html
 
 
 
+Spring Starter Project
+EmpService
+com.sbprj
+
+Artifact: EmpService
+Dependencies:
+Spring Web
+Spring Data JPA
+PostgreSQL Driver
+
+
+
+
+
+
+
+
+
+application.properties
+
+
+spring.application.name=EmpService
+
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/training
+spring.datasource.username=postgres
+spring.datasource.password=root
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+server.port=8080
+
+
+
+
+
+
+package com.sbprj.model;public class EmpTbl
+
+package com.sbprj.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "emptbl")
+public class EmpTbl {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	private String name;
+	private String department;
+
+	// Constructors
+	public EmpTbl() {
+	}
+
+	public EmpTbl(String name, String department) {
+		this.name = name;
+		this.department = department;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	// Getters and Setters
+	// ...
+}
+
+
+
+
+
+package com.sbprj.repository;public interface EmpRepository
+
+
+package com.sbprj.repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.sbprj.model.EmpTbl;
+
+public interface EmpRepository extends JpaRepository<EmpTbl, Integer> {
+}
+
+
+
+
+
+package com.sbprj.controller;public class EmpController
+
+
+package com.sbprj.controller;
+
+
+import com.sbprj.model.EmpTbl;
+import com.sbprj.repository.EmpRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+
+@CrossOrigin(origins = "http://localhost:3000")
+
+@RestController
+@RequestMapping("/api/employees")
+public class EmpController {
+
+    @Autowired
+    private EmpRepository empRepository;
+
+    @GetMapping
+    public List<EmpTbl> getAll() {
+        return empRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public EmpTbl getById(@PathVariable int id) {
+        return empRepository.findById(id).orElse(null);
+    }
+
+    @PostMapping
+    public EmpTbl create(@RequestBody EmpTbl emp) {
+        return empRepository.save(emp);
+    }
+
+    @PutMapping("/{id}")
+    public EmpTbl update(@PathVariable int id, @RequestBody EmpTbl updatedEmp) {
+        Optional<EmpTbl> optionalEmp = empRepository.findById(id);
+        if (optionalEmp.isPresent()) {
+            EmpTbl emp = optionalEmp.get();
+            emp.setName(updatedEmp.getName());
+            emp.setDepartment(updatedEmp.getDepartment());
+            return empRepository.save(emp);
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
+        empRepository.deleteById(id);
+    }
+}
+
+
+
+
+
 
 
