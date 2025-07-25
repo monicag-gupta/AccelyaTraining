@@ -35,5 +35,22 @@ select * from Emptbl;
 
 
 
+.Net Web API Project
+
+Create Project
+File → New → Project → ASP.NET Core Web API : WebAPI_EF_Prj
+Choose .NET 9 framework
+Enable Swagger ✅
+
+Do not use HTTPS (if your company has certificate for SSL, then install the certificate for the current system and have the project with https)
+
+
+
+
+
+
+
+
+
 
 
