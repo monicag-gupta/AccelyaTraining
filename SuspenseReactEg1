@@ -35,6 +35,29 @@ root.render(<App />);
 
 
 
+import ReactDOM from "react-dom/client";
+function add(a, b) {
+  return a + b;
+}
+
+function App(){
+  return(
+    <h1>No Add Called from math.js: <br/>
+     {add(16, 26)}
+    </h1>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
+
+
+
+
+
+
+
 
 
 
