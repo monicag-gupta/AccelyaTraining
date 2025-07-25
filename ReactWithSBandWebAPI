@@ -391,3 +391,17 @@ public class EmpController {
 
 
 
+Run as Maven clean, install, Spring boot run  : spring-boot:run
+
+Check in Postman:
+GET/POST/PUT/DELETE on http://localhost:8080/api/employees
+
+
+
+
+
+
+
+
+
+
