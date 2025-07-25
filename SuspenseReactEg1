@@ -148,6 +148,62 @@ root.render(<App />);
 
 
 
+Suspense: math.js
+
+function add(a, b) {
+    return a + b;
+  }
+export default function Math(){
+  return (<h1>Addition result of add(16,26) is: {add(16, 26)}</h1>);
+}
+
+
+
+Suspense: Sub.js
+
+
+function minus(a, b) {
+    return a - b;
+  }
+export default function Sub(){
+  return (<h1>Subtraction result of minus(26,16) is: {minus(26, 16)}</h1>);
+}
+
+
+
+
+
+Suspense : index.js
+
+
+//index.js
+import ReactDOM from "react-dom/client";
+import React from "react";
+const Math = React.lazy(() =>
+  new Promise(resolve => {
+    setTimeout(() => resolve(import('./math')), 2000); // Delay for 2 seconds
+  })
+);
+const Sub = React.lazy(() =>
+  new Promise(resolve => {
+    setTimeout(() => resolve(import('./Sub')), 2000); // Delay for 2 seconds
+  })
+);
+function App() {
+  return (
+    <div>
+      <h1>Add Called from math.js:</h1>
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <section>
+          <Math />
+          <Sub />
+        </section>
+      </React.Suspense>
+    </div>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
 
 
 
