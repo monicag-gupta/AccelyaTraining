@@ -629,6 +629,41 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 
 
+MSTest + Moq in .NET (e.g., .NET 9 / .NET Core / .NET Framework)
+
+Add MSTest Project:
+Add New Project → MSTest Project
+Name: EmployeeApi.Tests
+Target Framework: .NET 9
+
+
+
+
+
+Right Click to add dependencies/Project Reference: 
+Add Project Reference of EmployeeApi Project to EmployeeApi.Tests Project
+
+
+
+
+Install NuGet Packages In EmployeeApi.Tests:
+Install-Package Moq 4.20.72
+Install-Package MSTest.TestFramework 3.6.4
+Install-Package MSTest.TestAdapter 3.6.4
+
+
+Remove NuGet Package : This causes Conflict and thus no tests can be executed. 
+Because MSTest is deprecated or unnecessary (it's just a metapackage in older versions).
+MSTest 3.6.4 
+
+
+
+
+
+
+
+
+
 
 
 
