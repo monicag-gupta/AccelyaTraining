@@ -301,6 +301,189 @@ Provides input data for a [Theory] test.
 Provides complex input data from a class.
 
 
+Method
+Purpose
+IClassFixture<T>
+Shared setup/teardown for tests in a class.
+IDisposable
+Cleanup resources after a test class instance.
+
+
+
+
+Feature
+xUnit
+MSTest
+NUnit
+Attributes
+[Fact], [Theory]
+[TestMethod]
+[Test], [TestCase]
+Dependency Injection
+Supported
+Not supported
+Limited support
+Parallel Execution
+Built-in
+Limited
+Supported
+Test Explorer Integration
+Full
+Full
+Full
+
+
+
+
+
+
+Create a xUnit Project in VS2022 : xUnitTestPrj
+Create a static class to be tested: Calculator.cs
+Calculator
+ICalculator
+Calculator2
+Create the test classes: CalculatorTests.cs
+CalculatorTests
+CalculatorTests2
+TestLifecycleExample
+DatabaseTests
+DatabaseFixture
+Build the Project
+Go to top level Menu  -> Test -> Test Explorer
+If the project is already build, we can see all tests here
+Run or debug the tests to check them.
+
+
+Calculator.cs
+
+using System;
+namespace TempxUnitTestPrj
+{
+    public interface ICalculator
+    {
+        int Add(int a, int b);
+    }
+    public class Calculator2 : ICalculator
+    {
+        public int Add(int a, int b) => a + b;
+    }
+
+    public static class Calculator
+    {
+        public static int Add(int a, int b) => a + b;
+        public static int Subtract(int a, int b) => a - b;
+    }
+}
+
+
+
+
+
+
+CalculatorTests.cs
+
+using Xunit;
+namespace TempxUnitTestPrj
+{
+    public class CalculatorTests
+    {
+        [Fact]
+        public void Add_ReturnsCorrectSum()
+        {
+            int result = Calculator.Add(2, 3);
+            Assert.Equal(5, result);
+        }
+
+        [Fact]
+        public void Subtract_ReturnsCorrectDifference()
+        {
+            int result = Calculator.Subtract(5, 3);
+            Assert.Equal(2, result);
+        }
+
+        [Theory]
+        [InlineData(2, 3, 5)]
+        [InlineData(-1, 1, 0)]
+        [InlineData(0, 0, 0)]
+        public void Add_ReturnsCorrectSumTheory(int a, int b, int expected)
+        {
+            int result = Calculator.Add(a, b);
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void AssertionsExamples()
+        {
+            Assert.Equal(5, Calculator.Add(2, 3));      // Equality
+            Assert.NotEqual(4, Calculator.Add(2, 3));  // Inequality
+            Assert.True(5 > 3);                        // Boolean
+            Assert.Null(null);                         // Null check
+            int a = 0;
+            Assert.Throws<DivideByZeroException>(() => { int x = 1 / a; }); // Exception
+        }
+
+
+    }
+    public class CalculatorTests2
+    {
+        private readonly ICalculator _calculator;
+
+        public CalculatorTests2()
+        {
+            _calculator = new Calculator2(); // Mock or actual instance
+        }
+
+        [Fact]
+        public void Add_ReturnsCorrectSum()
+        {
+            Assert.Equal(5, _calculator.Add(2, 3));
+        }
+    }
+
+    public class DatabaseFixture : IDisposable
+    {
+        public string ConnectionString { get; private set; }
+
+        public DatabaseFixture()
+        {
+            // Initialize resources
+            ConnectionString = "Server=localhost;Database=TestDb;";
+        }
+
+        public void Dispose()
+        {
+            // Cleanup resources
+        }
+    }
+
+    public class DatabaseTests : IClassFixture<DatabaseFixture>
+    {
+        private readonly DatabaseFixture _fixture;
+
+        public DatabaseTests(DatabaseFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
+        [Fact]
+        public void TestConnection()
+        {
+            Assert.NotNull(_fixture.ConnectionString);
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
