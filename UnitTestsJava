@@ -508,9 +508,41 @@ public class TestController {
 Run as -> Maven clean, install, SB:run
 Go to localhost:8080/employee
 
+Once seen, then Stop the Application.
 
 
 
+
+
+
+package com.hello.controllers;
+
+import com.hello.model.Employee;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import static org.hamcrest.Matchers.is;
+
+@WebMvcTest(TestController.class)
+public class TestControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    void testFirstPage() throws Exception {
+        mockMvc.perform(get("/employee"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.name", is("emp1")))
+            .andExpect(jsonPath("$.designation", is("manager")))
+            .andExpect(jsonPath("$.empId", is("1")))
+            .andExpect(jsonPath("$.salary", is(3000.0)));
+    }
+}
 
 
 
