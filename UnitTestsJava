@@ -505,6 +505,15 @@ public class TestController {
 
 
 
+Run as -> Maven clean, install, SB:run
+Go to localhost:8080/employee
+
+
+
+
+
+
+
 
 
 
