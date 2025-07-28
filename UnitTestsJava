@@ -437,6 +437,13 @@ Spring Web
 
 
 
+Create the model class as Employee.java in package com.hello.model
+Create the Controller class as TestController.java in com.hello.controllers
+Code, Run and Check the Output
+Create Test Class for ControllerFile: src/test/java/com/hello/controllers/TestControllerTest.java
+Run this TestControllerTest.java class as a JUnit test case.
+
+
 
 
 
