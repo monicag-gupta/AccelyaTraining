@@ -455,6 +455,26 @@ test('fetches and displays user data', async () => {
 
 
 
+npm install --save-dev Enzyme  
+npm install --save-dev enzyme-to-json
+
+
+
+
+npm install --save-dev enzyme @wojtekmaj/enzyme-adapter-react-17 --force
+npm install --save-dev enzyme-to-json
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
