@@ -287,6 +287,21 @@ namespace MSTestPrj
 
 
 
+xUnit:
+
+Attribute
+Purpose
+[Fact]
+Marks a test method that does not take parameters.
+[Theory]
+Marks a test method with multiple data inputs.
+[InlineData]
+Provides input data for a [Theory] test.
+[ClassData]
+Provides complex input data from a class.
+
+
+
 
 
 
