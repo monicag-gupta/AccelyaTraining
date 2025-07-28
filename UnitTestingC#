@@ -660,6 +660,69 @@ MSTest 3.6.4
 
 
 
+Add Unit Test with Moq (optional) or Real ImplementationAdd EmployeeControllerTests.cs
+
+using EmployeeApi.Controllers;
+using EmployeeApi.Models;
+using EmployeeApi.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+
+namespace EmployeeApi.Tests
+{
+    [TestClass]
+    public class EmployeeControllerTests
+    {
+        private EmployeeController _controller;
+        private IEmployeeService _service;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _service = new EmployeeService();
+            _controller = new EmployeeController(_service);
+        }
+
+        [TestMethod]
+        public void GetAll_ReturnsAllEmployees()
+        {
+            var result = _controller.GetAll() as OkObjectResult;
+            var employees = result?.Value as List<Employee>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.StatusCode);
+            Assert.IsTrue(employees?.Count > 0);
+        }
+
+        [TestMethod]
+        public void GetById_ValidId_ReturnsEmployee()
+        {
+            var result = _controller.GetById(1) as OkObjectResult;
+            var employee = result?.Value as Employee;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.StatusCode);
+            Assert.AreEqual("Alice", employee?.Name);
+        }
+
+        [TestMethod]
+        public void AddEmployee_ReturnsCreated()
+        {
+            var newEmp = new Employee { Name = "Charlie", Department = "Finance" };
+            var result = _controller.Add(newEmp) as CreatedAtActionResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(201, result.StatusCode);
+            Assert.AreEqual("Charlie", ((Employee)result.Value)?.Name);
+        }
+    }
+}
+
+
+
+
+
 
 
 
