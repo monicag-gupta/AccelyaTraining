@@ -255,6 +255,129 @@ test('test scenario 1', () => {
 
 
 
+Common Jest Functions (with Examples):
+
+
+1. test() / it()
+Defines a test case.
+test("2 + 2 should be 4", () => {
+  expect(2 + 2).toBe(4);
+});
+it("returns true when active", () => {
+  expect(true).toBeTruthy();
+});
+
+2. expect()
+Performs assertions.
+expect(value).toBe(expected);       // primitive comparison
+expect(obj).toEqual(expectedObj);   // deep comparison for objects
+expect(fn).toThrow();  
+
+3. Mock Functions
+const mockFn = jest.fn();
+mockFn("hello");
+expect(mockFn).toHaveBeenCalledWith("hello");
+
+
+
+4. Matchers
+Matcher
+Description
+toBe(value)
+Exact match
+toEqual(obj)
+Deep match
+toBeNull()
+Null check
+toBeDefined() / toBeUndefined()
+Defined check
+toBeTruthy() / toBeFalsy()
+Boolean logic
+toContain(item)
+Array or string contains item
+toMatch(regex)
+String pattern match
+toHaveLength(n)
+Array length
+toHaveProperty('prop')
+Object property check
+
+
+5. Setup and Teardown
+Use for initializing before/after tests:
+beforeEach(() => { /* setup */ });
+afterEach(() => { /* cleanup */ });
+beforeAll(() => { /* once before all tests */ });
+afterAll(() => { /* once after all tests */ });
+
+6. Group Tests
+Use describe() to group related tests:
+describe("Math operations", () => {
+  test("adds", () => expect(1 + 1).toBe(2));
+  test("subtracts", () => expect(2 - 1).toBe(1));
+});
+
+7. Snapshot Testing
+import renderer from "react-test-renderer";
+import MyComponent from "./MyComponent";
+test("matches snapshot", () => {
+  const tree = renderer.create(<MyComponent />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+
+
+
+App.js
+// App.js
+import React, { useState } from 'react';
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1 data-testid="heading">Counter: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+
+
+
+
+App.test.js
+
+// App.test.js
+import { render, screen, fireEvent } from '@testing-library/react';
+import App from './App';
+test('renders initial counter value', () => {
+  render(<App />);
+  const heading = screen.getByTestId('heading');
+  expect(heading).toHaveTextContent('Counter: 0');
+});
+test('increments the counter when Increment button is clicked', () => {
+  render(<App />);
+  const incrementButton = screen.getByText('Increment');
+  fireEvent.click(incrementButton);
+  expect(screen.getByTestId('heading')).toHaveTextContent('Counter: 1');
+});
+test('resets the counter when Reset button is clicked', () => {
+  render(<App />);
+  const incrementButton = screen.getByText('Increment');
+  const resetButton = screen.getByText('Reset');
+  fireEvent.click(incrementButton); // counter = 1
+  fireEvent.click(resetButton);     // counter = 0
+  expect(screen.getByTestId('heading')).toHaveTextContent('Counter: 0');
+});
+
+
+
+
+
+
+
 
 
 
