@@ -200,5 +200,93 @@ namespace MSTestPrj
 
 
 
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace MSTestPrj
+{
+
+    [TestClass]
+    public class CalculatorTests
+    {
+        [TestMethod]
+        public void Add_ShouldReturnCorrectSum()
+        {
+            int result = Calculator.Add(2, 3);
+            Assert.AreEqual(5, result);
+        }
+
+        [TestMethod]
+        public void Subtract_ShouldReturnCorrectDifference()
+        {
+            int result = Calculator.Subtract(5, 3);
+            Assert.AreEqual(2, result);
+        }
+    }
+
+    [TestClass]
+    public class CalculatorTests2
+    {
+        [DataTestMethod]
+        [DataRow(2, 3, 5)]
+        [DataRow(-1, 1, 0)]
+        [DataRow(0, 0, 0)]
+        public void Add_ShouldReturnCorrectSum(int a, int b, int expected)
+        {
+            int result = Calculator.Add(a, b);
+            Assert.AreEqual(expected, result);
+        }
+    }
+
+
+    [TestClass]
+    public class TestLifecycleExample
+    {
+        [ClassInitialize]
+        public static void ClassInit(TestContext context)
+        {
+            Console.WriteLine("ClassInit: Before all tests");
+        }
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            Console.WriteLine("TestInit: Before each tests");
+        }
+
+        [TestMethod]
+        public void TestExample()
+        {
+            Assert.IsTrue(true);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            Console.WriteLine("TestCleanup: Post each tests");
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            Console.WriteLine("ClassCleanup: Post all tests");
+        }
+
+        [TestMethod]
+        public void AssertionsExample()
+        {
+            Assert.AreEqual(5, Calculator.Add(2, 3));
+            int x = 0;
+            Assert.ThrowsException<DivideByZeroException>(() => { int result = 1 / x; });
+        }
+    }
+}
+
+
+
+
+
+
+
 
 
