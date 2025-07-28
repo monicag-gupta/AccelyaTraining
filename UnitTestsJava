@@ -150,6 +150,23 @@ The Junit 5.x framework is annotation based, so let's see the annotations that c
 
 
 
+The org.junit.Assert class provides methods to assert the program logic.
+Methods of Assert class
+void assertEquals(boolean expected,boolean actual): checks that two primitives/objects are equal. It is overloaded.
+void assertTrue(boolean condition): checks that a condition is true.
+void assertFalse(boolean condition): checks that a condition is false.
+void assertNull(Object obj): checks that object is null.
+void assertNotNull(Object obj): checks that object is not null.
+
+
+
+
+
+
+
+
+
+
 
 
 
