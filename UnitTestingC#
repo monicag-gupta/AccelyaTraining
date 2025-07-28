@@ -490,6 +490,143 @@ No HTTPs
 
 
 
+Create folder Models
+Class : Employee
+
+namespace EmployeeApi.Models
+{
+    public class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Department { get; set; }
+    }
+}
+
+
+
+
+
+
+
+
+Create folder Services
+Interface : IEmployeeService
+
+using EmployeeApi.Models;
+
+namespace EmployeeApi.Services
+{
+    public interface IEmployeeService
+    {
+        List<Employee> GetAll();
+        Employee? GetById(int id);
+        void Add(Employee employee);
+    }
+}
+
+
+
+
+In Services
+Create class : EmployeeService 
+
+
+
+using EmployeeApi.Models;
+
+namespace EmployeeApi.Services
+{
+    public class EmployeeService : IEmployeeService
+    {
+        private readonly List<Employee> _employees = new()
+        {
+            new Employee { Id = 1, Name = "Alice", Department = "HR" },
+            new Employee { Id = 2, Name = "Bob", Department = "IT" }
+        };
+
+        public List<Employee> GetAll() => _employees;
+
+        public Employee? GetById(int id) => _employees.FirstOrDefault(e => e.Id == id);
+
+        public void Add(Employee employee)
+        {
+            employee.Id = _employees.Max(e => e.Id) + 1;
+            _employees.Add(employee);
+        }
+    }
+}
+
+
+
+
+
+
+Create Web API Controller in controllers: 
+EmployeeController
+
+using EmployeeApi.Models;
+using EmployeeApi.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace EmployeeApi.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class EmployeeController : ControllerBase
+    {
+        private readonly IEmployeeService _service;
+
+        public EmployeeController(IEmployeeService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        public IActionResult GetAll() => Ok(_service.GetAll());
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var emp = _service.GetById(id);
+            if (emp == null) return NotFound();
+            return Ok(emp);
+        }
+
+        [HttpPost]
+        public IActionResult Add(Employee employee)
+        {
+            _service.Add(employee);
+            return CreatedAtAction(nameof(GetById), new { id = employee.Id }, employee);
+        }
+    }
+}
+
+
+
+
+
+
+
+Register Service in Program.cs:
+
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
