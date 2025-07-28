@@ -165,6 +165,34 @@ void assertNotNull(Object obj): checks that object is not null.
 
 
 
+Create a Java project : JUnitPrj
+Add two packages:
+source 
+tests
+Add the class file:
+source/MainClass.java
+Add the JUnit Class file:
+tests/TestLogic.java
+Add it as JUnit 4 Unit Test Cases
+It will prompt to add the JUnit 5 library in the project. Add it.
+tests/TestCases.java
+Add the codes
+Run TestLogic as JUnit Tests
+Run TestCases as JUnit Tests
+Add Test Suite to the project
+Add both the Tests there
+ Run it to get all tests Results together
+Check the Result.
+ 
+
+
+
+
+
+
+
+
+
 
 
 
