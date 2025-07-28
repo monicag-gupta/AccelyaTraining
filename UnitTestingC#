@@ -25,3 +25,71 @@ namespace ManualUnitTesting
 
 
 
+
+MS Tests:
+
+Attribute
+Purpose
+[TestClass]
+Marks a class as containing test methods.
+[TestMethod]
+Marks a method as a test.
+[DataTestMethod]
+Marks a method for data-driven testing.
+[DataRow]
+Provides input data for [DataTestMethod].
+[TestInitialize]
+Runs code before each test method.
+[TestCleanup]
+Runs code after each test method.
+[ClassInitialize]
+Runs once before all tests in the class.
+[ClassCleanup]
+Runs once after all tests in the class.
+[Ignore]
+Skips a test method.
+[ExpectedException]
+Indicates that a specific exception is expected.
+
+
+
+Method
+Description
+Assert.AreEqual
+Verifies that two values are equal.
+Assert.AreNotEqual
+Verifies that two values are not equal.
+Assert.IsTrue
+Verifies that a condition is true.
+Assert.IsFalse
+Verifies that a condition is false.
+Assert.IsNull
+Verifies that an object is null.
+Assert.IsNotNull
+Verifies that an object is not null.
+Assert.ThrowsException
+Verifies that a specific exception is thrown.
+
+
+
+
+
+
+Create a MSTest Project in VS2022 : MSTestPrj
+Create a static class to be tested: Calculator.cs
+Calculator
+Create the test classes: CalculatorTests.cs
+CalculatorTests
+CalculatorTests2
+TestLifecycleExample
+Build the Project
+Go to top level Menu  -> Test -> Test Explorer
+If the project is already build, we can see all tests here
+Run or debug the tests to check them.
+
+
+
+
+
+
+
