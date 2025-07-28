@@ -14,54 +14,55 @@ class Test
 
 
 
-public class Main{
+public class Main {
 //@BeforeClass
-static{
-System.out.println("Before class Main");
-}
-public static void main(String[] a) {
-testsquare();//manual unit testing 
-}
-static int square(int x)
-{
-return x*x;
-}
-static int cube(int x)
-{
-return x*x*x;
-}
+	static {
+		System.out.println("Before class Main");
+	}
+
+	public static void main(String[] a) {
+		testsquare();// manual unit testing
+	}
+
+	static int square(int x) {
+		return x * x;
+	}
+
+	static int cube(int x) {
+		return x * x * x;
+	}
+
 //@test
-static void testsquare() {  //unit test functions: test cases
-fn();
-int aa=10;
-if(square(aa) == 110)
-{
-System.out.println("Test succedded");
-}
-else 
-System.out.println("Test failed");
-fna();
-}
+	static void testsquare() { // unit test functions: test cases
+		fn();
+		int aa = 10;
+		if (square(aa) == 110) {
+			System.out.println("Test succedded");
+		} else
+			System.out.println("Test failed");
+		fna();
+	}
+
 //@test
-static void testcube() { 
+	static void testcube() {
 //unit test functions: test cases
-fn();
-int aa=10;
-if(cube(aa) == 1000)
-{
-System.out.println("Test succedded");
-}
-else 
-System.out.println("Test failed");
-fna();
-}
+		fn();
+		int aa = 10;
+		if (cube(aa) == 1000) {
+			System.out.println("Test succedded");
+		} else
+			System.out.println("Test failed");
+		fna();
+	}
+
 //@Before
-static void fn() {
-System.out.println("before Test cases ");
-}
+	static void fn() {
+		System.out.println("before Test cases ");
+	}
+
 //@after
-static void fna() {
-System.out.println("After Test cases ");
-}
+	static void fna() {
+		System.out.println("After Test cases ");
+	}
 }
 
