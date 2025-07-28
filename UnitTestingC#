@@ -1,1 +1,27 @@
 ManualUnitTesting
+
+
+
+Program.cs
+
+using System;
+
+namespace ManualUnitTesting
+{
+    class Program
+    {
+        static int Add(int a, int b) => a + b;
+
+        static void Main()
+        {
+            Console.WriteLine("Testing Add Method");
+            Console.WriteLine(Add(2, 3) == 5 ? "Pass" : "Fail");
+        }
+    }
+}
+
+
+
+
+
+
