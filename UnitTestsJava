@@ -22,6 +22,7 @@ public class Main {
 
 	public static void main(String[] a) {
 		testsquare();// manual unit testing
+		testcube();
 	}
 
 	static int square(int x) {
@@ -39,7 +40,7 @@ public class Main {
 		if (square(aa) == 110) {
 			System.out.println("Test succedded");
 		} else
-			System.out.println("Test failed");
+			System.err.println("Test failed");
 		fna();
 	}
 
@@ -51,7 +52,7 @@ public class Main {
 		if (cube(aa) == 1000) {
 			System.out.println("Test succedded");
 		} else
-			System.out.println("Test failed");
+			System.err.println("Test failed");
 		fna();
 	}
 
