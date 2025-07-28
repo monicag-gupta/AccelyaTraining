@@ -66,3 +66,63 @@ public class Main {
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+class Emp{
+	//Before Class loaded
+	static {
+		System.out.println("3. Whenever the Class Name is read by Javac (Only Once)");
+	}
+	
+	//At every static fn call
+	static void fn() {
+		System.out.println("4. Whenever it is called : by the Class name");
+	}
+	
+	//At every instance before construction of object
+	{
+		System.out.println("5. This is called before constructors of the class(every new Instatnce)");
+	}
+	
+	//At Construction of objects
+	Emp(){
+		System.out.println("6. This is the constructor of the class(every new Instatnce)");
+	}
+	// Instance fn
+	void fnIns() {
+		System.out.println("7. Whenever it is called : by the Object");
+	}
+	
+	//clean up process
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("8. This is the destructor of the class(every death of an Instatnce)");
+	}
+	
+}
+public class Main2 {
+	static {
+		System.out.println("1. This is Main's static block");
+	}
+
+	public static void main(String[] args) {
+		System.out.println("2. This is Main's main() fn");
+		Emp.fn(); 
+		Emp emp=new Emp();
+		emp.fnIns();
+		emp = null;
+		System.gc();
+		System.out.println("9. This is Main's main() fn's end");
+		
+
+	}
+
+}
