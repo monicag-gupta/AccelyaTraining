@@ -165,6 +165,71 @@ export default App;
 
 
 
+App.test.js
+
+// App.test.js
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom'; // for custom matchers
+import App from "./App";
+
+test("input should be empty initially", () => {
+  render(<App />);
+  const input = screen.getByLabelText(/name/i);
+  expect(input).toBeInTheDocument();
+  expect(input).toHaveValue(""); // toHaveValue
+});
+
+test("submit button should be disabled initially", () => {
+  render(<App />);
+  const button = screen.getByRole("button", { name: /submit/i });
+  expect(button).toBeDisabled(); // toBeDisabled
+});
+
+test("submit button should enable after entering name", () => {
+  render(<App />);
+  const input = screen.getByLabelText(/name/i);
+  const button = screen.getByRole("button", { name: /submit/i });
+
+  fireEvent.change(input, { target: { value: "Alice" } });
+  // fireEvent is used to simulate user interaction.
+  // fireEvent.change simulates the user typing into a form input.
+  expect(button).toBeEnabled(); // toBeEnabled
+});
+
+test("displays submitted message after submitting form", () => {
+  render(<App />);
+  const input = screen.getByLabelText(/name/i);
+  const button = screen.getByRole("button", { name: /submit/i });
+// submit/i means, "Submit", case-insensitive
+  fireEvent.change(input, { target: { value: "Alice" } });
+  fireEvent.click(button);
+  const message = screen.getByRole("alert");
+  expect(message).toBeInTheDocument(); // toBeInTheDocument
+  expect(message).toHaveTextContent("Submitted: Alice"); // toHaveTextContent
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
