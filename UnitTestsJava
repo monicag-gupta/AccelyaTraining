@@ -288,6 +288,150 @@ public class TestCases {
 
 
 
+package source;
+public class MainClass {
+	public static int findMax(int arr[]) {
+//		int max = 0;
+		 int max=arr[0];
+		for (int i = 1; i < arr.length; i++) {
+			if (max < arr[i])
+				max = arr[i];
+		}
+		return max;
+	}
+	public static int cube(int n) {
+		return n * n * n;
+	}
+	public static int square(int n) {
+		try {
+			Thread.sleep(2000);
+		}
+		catch(InterruptedException e) {}
+		return n*n;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+package tests;
+import source.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class TestLogic {
+
+	@Test
+	public void test() {
+		assertEquals(-1,MainClass.findMax(new int[]{-1,-3,-4,-2}));
+
+	}
+	
+	@Test(timeout=1000)
+	public void testTimed() {
+		assertEquals(4,MainClass.square(2));
+
+	}
+
+}
+
+
+
+
+
+
+
+
+package tests;
+
+import static org.junit.Assert.*;
+import org.junit.*;
+import source.*;
+
+public class TestCases {
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		System.out.println("before all tests");
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		System.out.println("before each test");
+	}
+
+	@Test
+	public void testFindMax() {
+		System.out.println("test case1,2 find max");
+		assertEquals(4, MainClass.findMax(new int[] { 1, 3, 4, 2 }));
+		assertEquals(2, MainClass.findMax(new int[] { -12, -3, -4, 2 }));
+	}
+
+	@Test
+	public void testCube() {
+		System.out.println("test case cube");
+		assertEquals(27, MainClass.cube(3));
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		System.out.println("after each test");
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		System.out.println("after all tests");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+package tests;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+@RunWith(Suite.class)
+@SuiteClasses({ TestCases.class, TestLogic.class })
+public class AllTests {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
