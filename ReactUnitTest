@@ -28,5 +28,152 @@ And a file .babelrc in your root folder with:
 
 
 
+Here’s a complete explanation with examples of all the custom matchers provided by @testing-library/jest-dom — which extends Jest with more intuitive assertions for DOM nodes.
+
+1. toBeDisabled()
+Checks if an element is disabled.
+expect(button).toBeDisabled();
+2. toBeEnabled()
+Checks if an element is enabled.
+expect(input).toBeEnabled();
+3. toBeEmptyDOMElement()
+Checks if an element has no children or text content.
+expect(div).toBeEmptyDOMElement();
+4. toBeInTheDocument()
+Checks if an element is present in the DOM.
+expect(screen.getByText('Submit')).toBeInTheDocument();
+5. toBeInvalid()
+Checks if a form element is invalid (.checkValidity() === false).
+expect(input).toBeInvalid();
+6. toBeRequired()
+Checks if an input element has the required attribute.
+expect(input).toBeRequired();
+7. toBeValid()
+Checks if a form element is valid (.checkValidity() === true).
+expect(input).toBeValid();
+8. toBeVisible()
+Checks if an element is visible (not hidden with CSS or attribute).
+expect(div).toBeVisible();
+9. toContainElement(child)
+Checks if a parent DOM node contains a specific child element.
+expect(parentDiv).toContainElement(childDiv);
+10. toContainHTML(html)
+Checks if the element’s innerHTML contains the given HTML snippet.
+expect(div).toContainHTML('<span>Test</span>');
+11. toHaveAccessibleDescription()
+Checks the element’s accessible description (e.g., via aria-describedby).
+expect(button).toHaveAccessibleDescription('Click to save');
+12. toHaveAccessibleErrorMessage()
+Checks the element’s accessible error message (linked by aria-errormessage).
+expect(input).toHaveAccessibleErrorMessage('Invalid email');
+13. toHaveAccessibleName()
+Checks the element’s accessible name (e.g., from aria-label or <label>).
+expect(button).toHaveAccessibleName('Submit');
+14. toHaveAttribute(attrName, value?)
+Checks if an element has a specific attribute and optionally a value.
+expect(img).toHaveAttribute('src', 'logo.png');
+15. toHaveClass(className)
+Checks if the element has a class (or classes).
+expect(div).toHaveClass('active');
+expect(div).toHaveClass('btn primary');
+16. toHaveFocus()
+Checks if the element currently has focus.
+expect(input).toHaveFocus();
+17. toHaveFormValues(obj)
+Checks if a <form> has input values matching the provided key-value pairs.
+expect(form).toHaveFormValues({
+  username: 'john',
+  email: 'john@example.com'
+});
+18. toHaveStyle(css)
+Checks if an element has matching inline styles.
+expect(div).toHaveStyle('display: flex; color: red');
+19. toHaveTextContent(text, options?)
+Checks if the element contains specific text (ignores hidden children).
+expect(div).toHaveTextContent('Hello World');
+20. toHaveValue(value)
+Checks the value of an input, select, or textarea.
+expect(input).toHaveValue('John');
+21. toHaveDisplayValue(value)
+Checks the visible displayed value of a form control like <select> or <input>.
+expect(select).toHaveDisplayValue('Option A');
+22. toBeChecked()
+Checks if an input (checkbox/radio) is checked.
+expect(checkbox).toBeChecked();
+23. toBePartiallyChecked()
+Used for indeterminate checkboxes (not fully checked).
+expect(checkbox).toBePartiallyChecked();
+24. toHaveRole(role, options?)
+Checks if an element has a specific ARIA role.
+expect(button).toHaveRole('button');
+25. toHaveErrorMessage(message)
+Checks for accessible error messages (label or aria-related).
+expect(input).toHaveErrorMessage('Required field');
+
+Example Setup for Jest-DOM
+Install jest-dom if not already:
+npm install --save-dev @testing-library/jest-dom
+In setupTests.js:
+import '@testing-library/jest-dom';
+
+
+
+
+
+
+App.js
+
+// App.js
+import React, { useState } from "react";
+
+function App() {
+  const [name, setName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <div>
+      <h1>React Form Test</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name:</label>
+        <input
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <button type="submit" disabled={!name}>
+          Submit
+        </button>
+      </form>
+      {submitted && <p role="alert">Submitted: {name}</p>}
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
