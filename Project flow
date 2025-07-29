@@ -1,0 +1,23 @@
+Designing a Full-Stack CRUD Application (Class-Object Diagram, Use-case diagrams/Flowchart) 
+  Setting up Frontend (React) 
+  Backend (Java and .NET) Services/APIs 
+
+Implementing Business Logic (Modular diagram, sequence flow diagram)
+
+Database Integration (DFD/ ER –Diagram) : PostgreSQL
+
+Full-Stack Workflow (System Use-case diagram)
+
+Testing:
+  API Testing with Postman (Snapshots of Swagger and postman)
+  Version Control with Git (send snapshots of version change: V1: Git commit ; changes done ; git diff; git add and commit v2) 
+  Basic CI/CD Concepts (Theory documents : yml in Github/Gitlab)
+  Hosting Basics (React app/ API/ Services hosted in localhost)
+
+1st: 
+  Project Presentation : Explain the Project
+  Code Review : Show the code, explain, answer questions
+  Technical Quiz : Pre test (50) repeated, post test (50) 
+  Feedback Session (Questions on course delivered by trainer/ self study)
+  Final Deliverable Submission : Project, TOD, Documentation
+
