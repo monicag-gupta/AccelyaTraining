@@ -1,0 +1,17 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+function Car(props) {
+  return <li>I am a {props.brand}</li>;
+}
+function Cars() {
+  const myList = ['Ford', 'Suzuki', 'Creta', 'BMW', 'Mercedes'];
+  return (
+    <>
+      <ul>
+        {myList.map((myListEle) => <Car brand={myListEle} />)}
+      </ul>
+    </>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Cars />);
