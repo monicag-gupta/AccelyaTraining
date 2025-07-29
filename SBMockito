@@ -143,6 +143,128 @@ public class UserServiceTest {
 }
 
 
+Run the tests....
+
+
+
+
+…Adding Controller to the Application : User.java
+
+package com.example.demo.model;
+
+public class User {
+    private int id;
+    private String name;
+
+    public User() {}
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() { return id; }
+    public String getName() { return name; }
+
+    public void setId(int id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+}
+
+
+
+
+
+UserService.java
+
+package com.example.demo.service;
+
+import com.example.demo.model.User;
+
+public interface UserService {
+    User getUserById(int id);
+}
+
+
+
+
+package com.sbMockitoprj.controller;class UserController
+
+package com.sbMockitoprj.controller;
+
+import com.sbMockitoprj.model.User;
+import com.sbMockitoprj.service.UserService;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    private final UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable int id) {
+        return userService.getUserById(id);
+    }
+}
+
+
+
+
+
+
+
+package com.sbMockitoprj.service in src/test/javaUserControllerTest
+
+
+package com.sbMockitoprj.service;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+// still in production againt the above deprecated MockBean:
+//import org.springframework.boot.test.mock.mockito.ReplaceWithMock;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.sbMockitoprj.controller.UserController;
+import com.sbMockitoprj.model.User;
+
+
+@WebMvcTest(UserController.class)
+public class UserControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private UserService userService; // Mock the service dependency
+
+    @Test
+    public void testGetUser() throws Exception {
+        // Arrange
+        User user = new User(1, "Alice");
+        when(userService.getUserById(1)).thenReturn(user);
+
+        // Act + Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("Alice"));
+        //Ensures that the mocked method getUserById(1) was called once
+        verify(userService, times(1)).getUserById(1);
+    }
+}
+
+
+
+
 
 
 
