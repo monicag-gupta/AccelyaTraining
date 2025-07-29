@@ -8,3 +8,146 @@ Spring Web
 
 
 
+package com.sbMockitoprj.model
+class User
+
+package com.sbMockitoprj.model;
+
+public class User {
+private int id;
+private String name;
+
+public User() {
+}
+
+public User(int id, String name) {
+this.id = id;
+this.name = name;
+}
+
+public int getId() {
+return id;
+}
+
+public String getName() {
+return name;
+}
+
+public void setId(int id) {
+this.id = id;
+}
+
+public void setName(String name) {
+this.name = name;
+}
+}
+
+
+
+
+
+
+Package com.sbMockitoprj.repositoryUserRepository
+
+package com.sbMockitoprj.repository;
+
+import com.sbMockitoprj.model.User;
+
+public interface UserRepository {
+    User findById(int id);
+}
+
+
+
+
+
+
+package com.sbMockitoprj.serviceclass UserService
+
+package com.sbMockitoprj.service;
+
+import org.springframework.stereotype.Service;
+
+import com.sbMockitoprj.model.User;
+import com.sbMockitoprj.repository.UserRepository;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    // Constructor injection
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public String getUserName(int id) {
+        User user = userRepository.findById(id);
+        return (user != null) ? user.getName() : "Unknown";
+    }
+}
+
+
+
+
+
+
+
+package com.sbMockitoprj.service in src/test/javaclass UserServiceTest
+
+
+package com.sbMockitoprj.service;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.sbMockitoprj.model.User;
+import com.sbMockitoprj.repository.UserRepository;
+
+@ExtendWith(MockitoExtension.class)
+public class UserServiceTest {
+
+    @Mock
+    private UserRepository userRepository; // mocked dependency
+
+    @InjectMocks
+    private UserService userService; // injects mock into service
+
+    @Test
+    public void testGetUserName_UserFound() {
+        // Arrange
+        when(userRepository.findById(1)).thenReturn(new User(1, "Alice"));
+
+        // Act
+        String result = userService.getUserName(1);
+
+        // Assert
+        assertEquals("Alice", result);
+    }
+
+    @Test
+    public void testGetUserName_UserNotFound() {
+        when(userRepository.findById(2)).thenReturn(null);
+
+        String result = userService.getUserName(2);
+
+        assertEquals("Unknown", result);
+    }
+}
+
+
+
+
+
+
+
+
+
+
