@@ -45,3 +45,28 @@ root.render(<Cars />);
 
 
 
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+const Car = () => {
+    const cars = ["Ford", "Hyundai", "BMW"];
+    return (
+        <>
+            <p>The list of Cars are: </p>
+            <ul>
+                {cars.map(car => (
+                    <React.Fragment key={car}>
+                        <li>{car}</li>
+                    </React.Fragment>
+                ))}
+            </ul>
+        </>
+    );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car />);
+
+
