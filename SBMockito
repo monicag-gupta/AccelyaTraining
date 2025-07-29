@@ -150,7 +150,7 @@ Run the tests....
 
 …Adding Controller to the Application : User.java
 
-package com.example.demo.model;
+package com.sbMockitoprj.model;
 
 public class User {
     private int id;
@@ -175,13 +175,16 @@ public class User {
 
 UserService.java
 
-package com.example.demo.service;
+package com.sbMockitoprj.service;
 
-import com.example.demo.model.User;
+import com.sbMockitoprj.model.User;
+
 
 public interface UserService {
     User getUserById(int id);
 }
+
+
 
 
 
