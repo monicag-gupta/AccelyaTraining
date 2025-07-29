@@ -1,0 +1,10 @@
+Open Eclipse → File > New > Spring Starter Project
+Project name/ArtifactID : SBServiceMockitoPrj
+GroupID/package: com.sbMockitoprj
+
+Add the following dependencies:
+Spring Web
+
+
+
+
